@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="CSS/login.css">
+    </head>
+    <body>
+        <div class="login-form active" id="login-form">
+            <div class="login-text">Email:</div>
+            <div class="login-input">
+                <input type="text" class="textbox" id="user-email" placeholder="abc@gmail.com">
+            </div>
+            <div class="login-text">Password:</div>
+            <div class="login-input">
+                <input type="password" class="textbox" id="user-password">
+            </div>
+            <button style="grid-column: 2 span; justify-self: center; margin-top: 10%;" onclick="loginValidation();">Login</button>
+        </div>
+
+        <div class="button-choice" id="button-choice">
+            <h1 style="color: white; grid-column: 1 / 4;">What would you like to do?</h1>
+            <div class="button-interactive" id="pb">
+                <img src="Assets/pb.png" class="icon">
+                Product Backlog
+            </div>
+
+            <div class="button-interactive" id="sprint-management">
+                <img src="Assets/sprint.png" class="icon">
+                Sprint Management
+            </div>
+
+            <div class="button-interactive" id="member-management">
+                <img src="Assets/member.png" class="icon">
+                Member Management
+            </div>
+        </div>
+    </body>
+
+    <script src="JS/main.js"></script>
+    <script src="JS/login.js"></script>
+</html>
