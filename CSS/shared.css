@@ -37,7 +37,9 @@
 
 .member-profile {
     padding-left: 25px;
+    padding-right: 10px;
     height: 30px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
