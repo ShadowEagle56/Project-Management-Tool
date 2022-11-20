@@ -1,0 +1,57 @@
+.header {
+    background-color: royalblue;
+    overflow: hidden;
+    padding: 20px 10px;
+    margin: -10px;
+}
+
+.header a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 10px;
+    border-radius: 4px;
+}
+
+.header a.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.header a:hover {
+    background-color: white;
+    color: black;
+}
+
+.header a.active {
+    background-color: white;
+    color: black;
+}
+
+.header-right {
+    float: right;
+}
+
+.member-profile {
+    padding-left: 25px;
+    height: 30px;
+}
+
+@media screen and (max-width: 500px) {
+    .header a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    
+    .header-right {
+        float: none;
+    }
+
+    .member-profile {
+        display: none;
+    }
+}

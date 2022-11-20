@@ -18,23 +18,23 @@
 
         <div class="button-choice" id="button-choice">
             <h1 style="color: white; grid-column: 1 / 4;">What would you like to do?</h1>
-            <div class="button-interactive" id="pb">
+            <div class="button-interactive" id="pb" onclick="window.location.replace('backlog.html')">
                 <img src="Assets/pb.png" class="icon">
                 Product Backlog
             </div>
 
-            <div class="button-interactive" id="sprint-management">
+            <div class="button-interactive" id="sprint-management" onclick="window.location.replace('sprintList.html')">
                 <img src="Assets/sprint.png" class="icon">
                 Sprint Management
             </div>
 
-            <div class="button-interactive" id="member-management">
+            <div class="button-interactive" id="member-management" onclick="window.location.replace('memberList.html')">
                 <img src="Assets/member.png" class="icon">
                 Member Management
             </div>
         </div>
     </body>
 
-    <script src="JS/main.js"></script>
+    <script src="JS/shared.js"></script>
     <script src="JS/login.js"></script>
 </html>

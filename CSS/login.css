@@ -2,7 +2,7 @@ body {
     background-color: royalblue;
     display: flex;
     justify-content: center;
-    padding-top: 30%;
+    padding-top: 200px;
 }
 
 .login-form {
