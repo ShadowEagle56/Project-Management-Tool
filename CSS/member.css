@@ -1,0 +1,57 @@
+.member-details-container {
+    padding: 40px 10px 0px 10px;
+    display: grid;
+    grid-template-rows: 1 1fr;
+    grid-template-columns: 1 fr;
+}
+
+.details1 {
+    grid-column: 1;
+}
+
+.details2 {
+    grid-column: 2;
+}
+
+.manage-profile {
+    float: right;
+}
+
+.member-task-details {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-template-rows: 1fr;
+    padding: 0px 10px 0px 10px;
+    margin-top: 30px;
+    justify-content: left;
+    text-align: center;
+}
+
+.task1 {
+    grid-column: 1;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-right: 10px;
+    background-color: #F5F5F5;
+}
+
+.task2 {
+    grid-column: 2;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-left: 10px;
+    background-color: #F5F5F5;
+}
+
+.counter {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.chart-container {
+    margin: 10px 10px 0px 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    /* max-height: 50%; */
+    height: 500px;
+}

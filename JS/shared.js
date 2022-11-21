@@ -1,16 +1,21 @@
 // Main storage class
 class Storage {
     constructor() {
-        this._memberList = []
+        this._memberList = [];
         this._memberLoggedIn = "";
+        this._selectedMember = 0;
+        this._taskList = [];
     };
 
     // Getters
     get memberList() { return this._memberList; };
     get memberLoggedIn() { return this._memberLoggedIn; };
+    get selectedMember() { return this._selectedMember; };
+    get taskList() { return this._taskList; };
 
     // Setters
     set memberLoggedIn(member) { this._memberLoggedIn = member; };
+    set selectedMember(newNum) { this._selectedMember = newNum; };
     
     // Methods
     fromData(listObj) {
@@ -20,7 +25,14 @@ class Storage {
             this._memberList.push(member);
         }
 
+        for (let i in listObj._taskList) {
+            let task = new Task();
+            task.fromData(listObj._taskList[i]);
+            this._taskList.push(task);
+        }
+
         this._memberLoggedIn = listObj._memberLoggedIn;
+        this._selectedMember = listObj._selectedMember;
     };
 }
 
@@ -65,11 +77,87 @@ class Member {
     };
 
     fromData(memberObj) {
-        this._name = memberObj._firstName;
+        this.firstName = memberObj._firstName;
         this._lastName = memberObj._lastName;
         this._email = memberObj._email;
         this._password = memberObj._password;
         this._role = memberObj._role;
+    };
+};
+
+// Task class that stores all relevant informationn regarding a task
+class Task {
+    constructor (title, p){
+        this._title = title;
+        this._member;
+        this._description;
+        this._priority = p;
+        this._storyPoint = 0;
+        this._labels = [];
+        this._type;
+        this._startDate;
+        this._endDate;
+        this._index;
+        this._status;
+        this._sprint;
+        this._timeSpent;
+        this._totalHour;
+    };
+
+    // Getters
+    get title() { return this._title; };
+    get member() { return this._member; };
+    get description() { return this._description; };
+    get priority() { return this._priority; };
+    get storyPoint() { return this._storyPoint; };
+    get labels() { return this._labels; };
+    get type() { return this._type; };
+    get startDate() { return this._startDate; };
+    get endDate() { return this._endDate; };
+    get index() { return this._index; };
+    get status() { return this._status; };
+    get sprint() { return this._sprint; };
+    get timeSpent() { return this._timeSpent; };
+    get totalHour() { return this._totalHour; };
+
+    // Setters
+    set title(newTitle) { this._title = newTitle; };
+    set member(newMember) { this._member = newMember; };
+    set description(newDesc) { this._description = newDesc; };
+    set priority(newP) { this._priority = newP; };
+    set storyPoint(newSP) { this._storyPoint = newSP; };
+    set labels(newLabels) { this._labels = newLabels; };
+    set type(newType) { this._type = newType; };
+    set startDate(newDate) { this._startDate = newDate; };
+    set endDate(newDate) { this._endDate = newDate; };
+    set index(newIndex) { this._index = newIndex; };
+    set status(newStatus) { this._status = newStatus; };
+    set sprint(newSprint) { this._sprint = newSprint; };
+
+    // Methods
+    addRecord(date, hour, minute) {
+        let totalTime =  parseFloat(hour) + (parseFloat(minute)/60);
+        let record = [date, totalTime];
+        this._timeSpent.push(record);
+        let total = totalTime + parseFloat(this._totalHour);
+        this._totalHour = total.toFixed(2)
+        updateLocalStorage(APP_DATA_KEY, appStorage)
+    };
+
+    fromData(taskObj) {
+        this._title = taskObj._title;
+        this._member = taskObj._member;
+        this._description = taskObj._description;
+        this._priority = taskObj._priority;
+        this._storyPoint = taskObj._storyPoint;
+        this._labels = taskObj._labels;
+        this._type = taskObj._type;
+        this._startDate = taskObj._startDate;
+        this._endDate = taskObj._endDate;
+        this._index = taskObj._index;
+        this._status = taskObj._status;
+        this._sprint = taskObj._sprint;
+        this._timeSpent = taskObj._timeSpent;
     };
 };
 

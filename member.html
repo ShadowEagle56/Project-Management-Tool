@@ -2,8 +2,9 @@
 <html>
     <head>
         <link rel="stylesheet" href="CSS/shared.css">
+        <link rel="stylesheet" href="CSS/member.css">
     </head>
-    <body>
+    <body onload="memberDetails()">
         <div class="header">
             <a href="login.html" class="logo">PMT</a>
             <div class="header-right">
@@ -14,5 +15,31 @@
                 </div>
             </div>
         </div>
+
+        <div class="member-details-container">
+            <div class="details1" id="member-name"></div>
+            <div class="details2">
+                <button class="manage-profile">Manage profile</button>
+            </div>
+        </div>
+
+        <div class="member-task-details">
+            <div class="task1" id="member-tasks-due">
+                <p class="counter" id="incomplete-num">0</p>
+                <p>Incomplete Tasks</p>
+            </div>
+
+            <div class="task2" id="member-completed">
+                <p class="counter" id="completed-num">0</p>
+                <p>Completed Tasks</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="member-chart"></canvas>
+        </div>
     </body>
+
+    <script src="JS/shared.js"></script>
+    <script src="JS/member.js"></script>
 </html>
