@@ -2,9 +2,11 @@
 
 const APP_DATA_KEY = "ScrumPMTData";
 
-function memberDetails() {
-    let memberName = document.getElementById("member-name");
-    memberName.innerHTML = appStorage.memberList[appStorage.selectedMember].firstName + " " + appStorage.memberList[appStorage.selectedMember].lastName
+// Goes to the profile of the current logged in user
+function userProfile() {
+    appStorage.selectedMember = appStorage.memberLoggedIn._memberId;
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.replace('member.html')
 }
 
 let appStorage = new Storage();

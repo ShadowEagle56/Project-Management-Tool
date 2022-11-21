@@ -50,6 +50,11 @@ if (appStorage.memberList.length == 0) {
     appStorage.memberList.push(defaultMember);
 }
 
+if (appStorage.memberList.length == 1) {
+    let defaultMember = new Member("Sofia", "Lee", "sofia@gmail.com", "password", "Scrum Master", 1);
+    appStorage.memberList.push(defaultMember);
+}
+
 if (appStorage.memberLoggedIn) {
     login.classList.remove("active");
     buttonChoice.classList.add("active");
