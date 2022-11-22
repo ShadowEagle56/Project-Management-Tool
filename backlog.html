@@ -2,7 +2,9 @@
 <html>
     <head>
         <link rel="stylesheet" href="CSS/shared.css">
+        <link rel="stylesheet" href="CSS/backlog.css">
     </head>
+    
     <body>
         <div class="header">
             <a href="login.html" class="logo">PMT</a>
@@ -11,6 +13,76 @@
                 <a href="sprintList.html">Sprint List</a>
                 <a href="memberList.html">Member List</a>
                 <img src="Assets/profile.png" class="member-profile" onclick="userProfile()">
+            </div>
+        </div>
+
+        <div class="backlog-main">
+            <div class="container1">
+                <button>Filter</button>
+                <button>Add Label</button>
+            </div>
+
+            <div class="container2">
+                <button class="legend-button">View Legend</button>
+            </div>
+
+            <div class="us-container">
+                <div class="container-header">
+                    <div>User Story</div>
+                    <div>
+                        <button class="add">&plus;</button>
+                    </div>
+                </div>
+
+                <div class="us-items" id="us-items">
+                    <!-- Temporary placeholder -->
+                    <div class="us-card" id="us-0">
+                        <div class="us-card-header" style="background-color: lightgreen">Feature 1</div>
+                        <div class="us-card-content">
+                            <div class="story-point" style="background-color: lightyellow;">SP 8</div>
+                        </div>
+                    </div>
+
+                    <div class="us-card" id="us-1">
+                        <div class="us-card-header" style="background-color: lightcoral">Feature 2</div>
+                        <div class="us-card-content">
+                            <div class="story-point" style="background-color: lightyellow;">SP 16</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-container">
+                <div class="container-header">
+                    <div>Product Backlog</div>
+                    <div>
+                        <button class="add">&plus;</button>
+                    </div>
+                </div>
+
+                <div class="task-items">
+                    <!-- Temporary place holder -->
+                    <div class="task-card" id="task-0">
+                        <div class="task-card-header" style="background-color: lightyellow;">Task 1</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: rgb(212, 248, 204);">SP 2</div>
+                        </div>
+                    </div>
+
+                    <div class="task-card" id="task-1">
+                        <div class="task-card-header" style="background-color: lightgreen;">Task 2</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: rgb(212, 248, 204);">SP 2</div>
+                        </div>
+                    </div>
+
+                    <div class="task-card" id="task-2">
+                        <div class="task-card-header" style="background-color: lightcoral;">Task 3</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: rgb(212, 248, 204);">SP 2</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
