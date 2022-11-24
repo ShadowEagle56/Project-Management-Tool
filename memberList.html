@@ -14,6 +14,36 @@
                 <img src="Assets/profile.png" class="member-profile" onclick="userProfile()">
             </div>
         </div>
+
+        <div class="member-main">
+            <div class="button-container">
+                <button>Filter</button>
+                <button>Add Member</button>
+            </div>
+            <div class="member-container">
+                <!-- Temporary placeholder -->
+                <div class="member-card" id="member-0">
+                    <div class="role">PO</div>
+                    <div class="card-name">John Adams</div>
+                    <div class="card-sp">SP 8</div>
+                    <div class="card-contribution">4.9 Hours</div>
+                </div>
+            </div>
+
+            <div class="incomplete-task-counter">
+                <p class="counter" id="incomplete-tasks">0</p>
+                <p>Incompleted Tasks</p>
+            </div>
+
+            <div class="complete-task-counter">
+                <p class="counter" id="complete-tasks">0</p>
+                <p>Completed Tasks</p>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="member-chart"></canvas>
+            </div>
+        </div>
     </body>
 
     <script src="JS/shared.js"></script>
