@@ -30,26 +30,11 @@
                 <div class="container-header">
                     <div>User Story</div>
                     <div>
-                        <button class="add">&plus;</button>
+                        <button class="add" onclick="openAddUSPopup()">&plus;</button>
                     </div>
                 </div>
 
-                <div class="us-items" id="us-items">
-                    <!-- Temporary placeholder -->
-                    <div class="us-card" id="us-0">
-                        <div class="us-card-header" style="background-color: lightgreen">Feature 1</div>
-                        <div class="us-card-content">
-                            <div class="story-point" style="background-color: lightyellow;">SP 8</div>
-                        </div>
-                    </div>
-
-                    <div class="us-card" id="us-1">
-                        <div class="us-card-header" style="background-color: lightcoral">Feature 2</div>
-                        <div class="us-card-content">
-                            <div class="story-point" style="background-color: lightyellow;">SP 16</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="us-items" id="us-items"></div>
             </div>
 
             <div class="task-container">
@@ -86,6 +71,44 @@
             </div>
         </div>
     </body>
+
+    <div id="overlay"></div>
+
+    <!-- Add User Story Popup -->
+    <div class="add-us-popup" id="add-us-popup">
+        <div class="add-us-popup-header">
+            <div class="popup-title">Add User Story</div>
+            <div>
+                <button class="close-button" onclick="closeAddUSPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="add-us-popup-body">
+            <div class="us-title">Title:</div>
+            <div class="us-input">
+                <input type="text" placeholder="Title..." id="add-us-title" class="input-text">
+            </div>
+
+            <div class="us-title">Priority:</div>
+            <div class="us-input">
+                <select name="priority-list" id="add-us-priority">
+                    <option value="">Select an option</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="us-title">Description:</div>
+            <div class="us-input">
+                <textarea placeholder="Description..." id="add-us-description" class="input-text"></textarea>
+            </div>
+        </div>
+
+        <div class="add-us-submit">
+            <button onclick="addUS()">Add User Story</button>
+        </div>
+    </div>
 
     <script src="JS/shared.js"></script>
     <script src="JS/backlog.js"></script>

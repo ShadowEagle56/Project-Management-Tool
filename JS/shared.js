@@ -5,6 +5,7 @@ class Storage {
         this._memberLoggedIn = "";
         this._selectedMember = 0;
         this._taskList = [];
+        this._usList = [];
     };
 
     // Getters
@@ -12,6 +13,7 @@ class Storage {
     get memberLoggedIn() { return this._memberLoggedIn; };
     get selectedMember() { return this._selectedMember; };
     get taskList() { return this._taskList; };
+    get usList() { return this._usList; };
 
     // Setters
     set memberLoggedIn(member) { this._memberLoggedIn = member; };
@@ -29,6 +31,15 @@ class Storage {
             let task = new Task();
             task.fromData(listObj._taskList[i]);
             this._taskList.push(task);
+        }
+
+        for (let i in listObj._usList) {
+            let us = new UserStory();
+            us.fromData(listObj._usList[i]);
+            this._usList.push(us);
+            if (window.location.href.includes("backlog.html")){
+                addUSCard(us, i);
+            };
         }
 
         this._memberLoggedIn = listObj._memberLoggedIn;
@@ -160,6 +171,35 @@ class Task {
         this._timeSpent = taskObj._timeSpent;
     };
 };
+
+class UserStory {
+    constructor (title, p) {
+        this._title = title;
+        this._priority = p;
+        this._storyPoint = 0;
+        this._description = "";
+    }
+
+    // Getters
+    get title() { return this._title; };
+    get priority() { return this._priority; };
+    get storyPoint() { return this._storyPoint; };
+    get description() { return this._description; };
+
+    // Setters
+    set title(newTitle) { this._title = newTitle; };
+    set priority(newP) { this._priority = newP; };
+    set storyPoint(newSP) { this._storyPoint = newSP; };
+    set description(newDesc) { this._description = newDesc; };
+
+    // Methods
+    fromData(usObj) {
+        this._title = usObj._title;
+        this._priority = usObj._priority;
+        this._storyPoint = usObj._storyPoint;
+        this._description = usObj._description;
+    };
+}
 
 // Upload data with the key into local storage
 function updateLocalStorage(key, data) {
