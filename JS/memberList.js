@@ -30,7 +30,7 @@ function addMember() {
     let email = document.getElementById("add-member-email").value;
     let password = document.getElementById("add-member-password").value;
 
-    let member = new Member(fname, lname, role, email, password);
+    let member = new Member(fname, lname, email, password, role);
     appStorage.memberList.push(member);
     updateLocalStorage(APP_DATA_KEY, appStorage);
 
@@ -50,7 +50,7 @@ function addMemberCard(member, id) {
     }
 
     let card = `<div class="member-card" id="member-${id}">
-                    <div class="role">${role(member.role)}</div>
+                    <div class="role">${role(member.role).slice(0,2)}</div>
                     <div class="card-name">${member.firstName + " " + member.lastName}</div>
                     <div class="card-sp">SP ${member.totalStoryPoint}</div>
                     <div class="card-contribution">${contribution} Hours</div>
