@@ -18,17 +18,9 @@
         <div class="member-main">
             <div class="button-container">
                 <button>Filter</button>
-                <button>Add Member</button>
+                <button onclick="openAddMemberPopup()">Add Member</button>
             </div>
-            <div class="member-container">
-                <!-- Temporary placeholder -->
-                <div class="member-card" id="member-0">
-                    <div class="role">PO</div>
-                    <div class="card-name">John Adams</div>
-                    <div class="card-sp">SP 8</div>
-                    <div class="card-contribution">4.9 Hours</div>
-                </div>
-            </div>
+            <div class="member-container" id="member-container"></div>
 
             <div class="incomplete-task-counter">
                 <p class="counter" id="incomplete-tasks">0</p>
@@ -45,6 +37,47 @@
             </div>
         </div>
     </body>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Add Member Popup -->
+    <div class="add-member-popup" id="add-member-popup">
+        <div class="add-member-popup-header">
+            <div class="popup-title">Add Member</div>
+            <div>
+                <button class="close-button" onclick="closeAddMemberPopup()">&times;</button>
+            </div>
+        </div>
+        <div class="add-member-popup-body">
+            <div class="member-title">First Name:</div>
+            <div class="member-input">
+                <input type="text" placeholder="John" id="add-member-fname">
+            </div>
+            
+            <div class="member-title">Last Name:</div>
+            <div class="member-input">
+                <input type="text" placeholder="Adams" id="add-member-lname">
+            </div>
+
+            <div class="member-title">Role:</div>
+            <div class="member-input">
+                <input type="text" placeholder="Team Member" id="add-member-role">
+            </div>
+
+            <div class="member-title">Email:</div>
+            <div class="member-input">
+                <input type="text" placeholder="john@gmail.com" id="add-member-email">
+            </div>
+
+            <div class="member-title">Password:</div>
+            <div class="member-input">
+                <input type="text" placeholder="password" id="add-member-password">
+            </div>
+        </div>
+
+        <div class="member-submit">
+            <button onclick="addMember()">Add Member</button>
+        </div>
+    </div>
 
     <script src="JS/shared.js"></script>
     <script src="JS/memberList.js"></script>

@@ -25,6 +25,9 @@ class Storage {
             let member = new Member();
             member.fromData(listObj._memberList[i]);
             this._memberList.push(member);
+            if (window.location.href.includes("memberList.html")) {
+                addMemberCard(member, i)
+            }
         }
 
         for (let i in listObj._taskList) {
