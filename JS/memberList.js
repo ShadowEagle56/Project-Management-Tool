@@ -37,6 +37,15 @@ function addMember() {
     addMemberCard(member, appStorage.memberList.length - 1)
 
     closeAddMemberPopup();
+    clearAddMemberPopupData();
+}
+
+function clearAddMemberPopupData() {
+    document.getElementById("add-member-fname").value = "";
+    document.getElementById("add-member-lname").value = "";
+    document.getElementById("add-member-role").value = "";
+    document.getElementById("add-member-email").value = "";
+    document.getElementById("add-member-password").value = "";
 }
 
 function addMemberCard(member, id) {
