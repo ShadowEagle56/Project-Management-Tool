@@ -20,6 +20,12 @@
     border-radius: 10px;
     column-gap: 15px;
     line-height: 30px;
+    background-color: rgb(235, 240, 255);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card-date, .card-status {
+    background-color: white;
 }
 
 .sprint-card:hover{
@@ -35,4 +41,78 @@
     border: 0.5px solid black;
     text-align: center;
     font-weight: bold;
+}
+
+/* Add Sprint Popup */
+.add-sprint-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    padding: 20px;
+    width: 30%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.add-sprint-popup-header {
+    display: grid;
+    grid-template-columns: 30fr 1fr;
+    font-weight: bold;
+    text-align: center;
+    font-size: larger;
+}
+
+.close-button {
+    float: right;
+}
+
+.add-sprint-popup-body {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.sprint-title {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+.sprint-input {
+    grid-column: 2;
+}
+
+.input-text {
+    width: 100%;
+}
+
+.add-sprint-popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.add-sprint-submit {
+    padding-top: 20px;
+    justify-self: center;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }

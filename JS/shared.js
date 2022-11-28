@@ -6,6 +6,7 @@ class Storage {
         this._selectedMember = 0;
         this._taskList = [];
         this._usList = [];
+        this._sprintList = [];
     };
 
     // Getters
@@ -14,6 +15,7 @@ class Storage {
     get selectedMember() { return this._selectedMember; };
     get taskList() { return this._taskList; };
     get usList() { return this._usList; };
+    get sprintList() { return this._sprintList; };
 
     // Setters
     set memberLoggedIn(member) { this._memberLoggedIn = member; };
@@ -43,6 +45,14 @@ class Storage {
             if (window.location.href.includes("backlog.html")){
                 addUSCard(us, i);
             };
+        }
+
+        for (let i in listObj._sprintList) {
+            let sprint = new Sprint();
+            sprint.fromData(listObj._sprintList[i]);
+            if (window.location.href.includes("sprintList.html")){
+                addSprintCard(sprint, i);
+            }
         }
 
         this._memberLoggedIn = listObj._memberLoggedIn;
@@ -202,6 +212,35 @@ class UserStory {
         this._storyPoint = usObj._storyPoint;
         this._description = usObj._description;
     };
+}
+
+class Sprint {
+    constructor (title, startDate, endDate) {
+        this._title = title;
+        this._startDate = startDate;
+        this._endDate = endDate;
+        this._status = "Inactive";
+    }
+
+    // Getters
+    get title() { return this._title; };
+    get startDate() { return this._startDate; };
+    get endDate() { return this._endDate; };
+    get status() { return this._status; };
+
+    // Setters
+    set title(newTitle) { this._title = newTitle; };
+    set startDate(newDate) { this._startDate = newDate; };
+    set endDate(newDate) { this._endDate = newDate; };
+    set status(newStatus) { this._status = newStatus; };
+
+    // Methods
+    fromData(sprintObj) {
+        this._title = sprintObj._title;
+        this._startDate = sprintObj._startDate;
+        this._endDate = sprintObj._endDate;
+        this._status = sprintObj._status;
+    }
 }
 
 // Upload data with the key into local storage

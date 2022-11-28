@@ -18,24 +18,44 @@
         <div class="sprint-main">
             <div class="button-container">
                 <button>Filter</button>
-                <button>Add Sprint</button>
+                <button onclick="openAddSprintPopup()">Add Sprint</button>
             </div>
-            <div class="sprint-container">
-                <!-- Temporary placeholder -->
-                <div class="sprint-card" id="sprint-card-0">
-                    <div class="card-title">Sprint 1</div>
-                    <div class="card-date">2022-11-24 - 2022-12-31</div>
-                    <div class="card-status">Inactive</div>
-                </div>
-
-                <div class="sprint-card" id="sprint-card-1">
-                    <div class="card-title">Sprint 2</div>
-                    <div class="card-date">2022-11-24 - 2022-12-31</div>
-                    <div class="card-status">Inactive</div>
-                </div>
-            </div>
+            <div class="sprint-container" id="sprint-container"></div>
         </div>
     </body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Add Sprint Popup -->
+    <div class="add-sprint-popup" id="add-sprint-popup">
+        <div class="add-sprint-popup-header">
+            <div class="popup-title">Add Sprint</div>
+            <div>
+                <button class="close-button" onclick="closeAddSprintPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="add-sprint-popup-body">
+            <div class="sprint-title">Title:</div>
+            <div class="sprint-input">
+                <input type="text" placeholder="Title" id="add-sprint-title">
+            </div>
+
+            <div class="sprint-title">Start Date:</div>
+            <div class="sprint-input">
+                <input type="date" id="add-sprint-start-date">
+            </div>
+
+            <div class="sprint-title">End Date</div>
+            <div class="sprint-input">
+                <input type="date" id="add-sprint-end-date">
+            </div>
+        </div>
+
+        <div class="add-sprint-submit">
+            <button onclick="addSprint()">Add Sprint</button>
+        </div>
+    </div>
 
     <script src="JS/shared.js"></script>
     <script src="JS/sprintList.js"></script>
