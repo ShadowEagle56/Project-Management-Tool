@@ -50,6 +50,7 @@ class Storage {
         for (let i in listObj._sprintList) {
             let sprint = new Sprint();
             sprint.fromData(listObj._sprintList[i]);
+            this._sprintList.push(sprint);
             if (window.location.href.includes("sprintList.html")){
                 addSprintCard(sprint, i);
             }
