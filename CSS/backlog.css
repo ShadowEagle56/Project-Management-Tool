@@ -198,8 +198,8 @@
     }
 }
 
-/* Add User Story Popup */
-.add-us-popup {
+/* User Story Popup */
+.add-us-popup, .view-us-popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -213,7 +213,7 @@
     transform: translate(-50%, -50%) scale(0);
 }
 
-.add-us-popup-header {
+.add-us-popup-header, .view-us-popup-header {
     display: grid;
     grid-template-columns: 30fr 1fr;
     font-weight: bold;
@@ -225,7 +225,7 @@
     float: right;
 }
 
-.add-us-popup-body {
+.add-us-popup-body, .view-us-popup-body {
     margin-top: 10px;
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -247,13 +247,27 @@
     width: 100%;
 }
 
-.add-us-popup.active {
+.add-us-popup.active, .view-us-popup.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
 .add-us-submit {
     padding-top: 20px;
     justify-self: center;
+}
+
+.view-us-button-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.view-us-edit-button {
+    grid-column: 1;
+}
+
+.view-us-delete-button {
+    grid-column: 2;
 }
 
 #overlay {

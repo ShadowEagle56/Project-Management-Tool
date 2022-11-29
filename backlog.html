@@ -110,6 +110,36 @@
         </div>
     </div>
 
+    <!-- User Story Details Popup -->
+    <div class="view-us-popup" id="view-us-popup">
+        <div class="view-us-popup-header">
+            <div class="popup-title">View User Story</div>
+            <div>
+                <button class="close-button" onclick="closeViewUSPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="view-us-popup-body">
+            <div class="us-title">Title:</div>
+            <div class="us-details" id="view-us-title"></div>
+
+            <div class="us-title">Priority:</div>
+            <div class="us-details" id="view-us-priority"></div>
+
+            <div class="us-title">Description:</div>
+            <div class="us-details" id="view-us-description"></div>
+        </div>
+
+        <div class="view-us-button-container">
+            <div class="view-us-edit-button">
+                <button>Edit User Story</button>
+            </div>
+            <div class="view-us-delete-button">
+                <button>Delete User Story</button>
+            </div>
+        </div>
+    </div>
+
     <script src="JS/shared.js"></script>
     <script src="JS/backlog.js"></script>
 </html>

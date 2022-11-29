@@ -66,7 +66,7 @@ function addUSCard(us, id) {
         spColor = high;
     }
 
-    let card = `<div class="us-card" id="us-${id}">
+    let card = `<div class="us-card" id="us-${id}" onclick="viewUSPopup(${id})">
                     <div class="us-card-header" style="background-color: ${color}">${us.title}</div>
                     <div class="us-card-content">
                         <div class="story-point" style="background-color: ${spColor};">SP ${us.storyPoint}</div>
@@ -74,6 +74,28 @@ function addUSCard(us, id) {
                 </div>`
     
     usContainer.insertAdjacentHTML('beforeend', card)
+}
+
+// View User Story Details
+function viewUSPopup(id) {
+    let title = document.getElementById("view-us-title");
+    let priority = document.getElementById("view-us-priority");
+    let description = document.getElementById("view-us-description");
+
+    let us = appStorage.usList[id];
+    title.innerHTML = us.title;
+    priority.innerHTML = us.priority;
+    description.innerHTML = us.description;
+
+    let popup = document.getElementById("view-us-popup");
+    popup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+function closeViewUSPopup() {
+    let popup = document.getElementById("view-us-popup");
+    popup.classList.remove("active");
+    overlay.classList.remove("active");
 }
 
 let appStorage = new Storage();
