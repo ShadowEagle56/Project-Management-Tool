@@ -87,6 +87,10 @@ function viewUSPopup(id) {
     priority.innerHTML = us.priority;
     description.innerHTML = us.description;
 
+    document.getElementById("view-us-button-container").innerHTML = `<div class="view-us-edit-button">
+                                                                        <button onclick="editUS(${id})">Edit User Story</button>
+                                                                    </div>`
+
     let popup = document.getElementById("view-us-popup");
     popup.classList.add("active");
     overlay.classList.add("active");
@@ -96,6 +100,49 @@ function closeViewUSPopup() {
     let popup = document.getElementById("view-us-popup");
     popup.classList.remove("active");
     overlay.classList.remove("active");
+}
+
+function editUS(id) {
+    document.getElementById("edit-us-title").value = appStorage.usList[id].title;
+    document.getElementById("edit-us-priority").value = appStorage.usList[id].priority;
+    document.getElementById("edit-us-description").value = appStorage.usList[id].description;
+
+    document.getElementById("edit-us-button-container").innerHTML = `<button onclick="editUSApply(${id})">Apply</button>
+    <button onclick="closeEditUS()">Cancel</button>
+    <button onclick="deleteUS(${id})">Delete</button>`
+
+    let viewPopup = document.getElementById("view-us-popup");
+    viewPopup.classList.remove("active");
+
+    let editPopup = document.getElementById("edit-us-popup");
+    editPopup.classList.add("active");
+}
+
+function closeEditUS() {
+    let editPopup = document.getElementById("edit-us-popup");
+    editPopup.classList.remove("active");
+
+    let viewPopup = document.getElementById("view-us-popup");
+    viewPopup.classList.add("active");
+}
+
+function editUSApply(id) {
+    let title = document.getElementById("edit-us-title").value;
+    let priority = document.getElementById("edit-us-priority").value;
+    let desc = document.getElementById("edit-us-description").value;
+
+    appStorage.usList[id].title = title;
+    appStorage.usList[id].priority = priority;
+    appStorage.usList[id].description = desc;
+
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.reload();
+}
+
+function deleteUS(id) {
+    appStorage.usList.splice(id, 1);
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.reload();
 }
 
 let appStorage = new Storage();

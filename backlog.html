@@ -130,13 +130,46 @@
             <div class="us-details" id="view-us-description"></div>
         </div>
 
-        <div class="view-us-button-container">
-            <div class="view-us-edit-button">
-                <button>Edit User Story</button>
+        <div class="view-us-button-container" id="view-us-button-container">
+            
+        </div>
+    </div>
+
+    <!-- Edit User Story Popup -->
+    <div class="edit-us-popup" id="edit-us-popup">
+        <div class="edit-us-popup-header">
+            <div class="popup-title">Edit User Story</div>
+            <div>
+                <button class="close-button" onclick="closeEditUS()">&times;</button>
             </div>
-            <div class="view-us-delete-button">
-                <button>Delete User Story</button>
+        </div>
+
+        <div class="edit-us-popup-body">
+            <div class="us-title">Title:</div>
+            <div class="us-input">
+                <input type="text" placeholder="Title..." id="edit-us-title" class="input-text">
             </div>
+
+            <div class="us-title">Priority:</div>
+            <div class="us-input">
+                <select name="priority-list" id="edit-us-priority">
+                    <option value="">Select an option</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="us-title">Description:</div>
+            <div class="us-input">
+                <textarea placeholder="Description..." id="edit-us-description" class="input-text"></textarea>
+            </div>
+        </div>
+
+        <div class="edit-us-button-container" id="edit-us-button-container">
+            <button>Apply</button>
+            <button onclick="closeEditUS()">Cancel</button>
+            <button>Delete</button>
         </div>
     </div>
 
