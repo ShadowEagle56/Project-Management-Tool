@@ -9,18 +9,25 @@ function userProfile() {
     window.location.replace('member.html')
 }
 
+////////////////////////////////// User Story //////////////////////////////////
 const overlay = document.getElementById("overlay");
+const addUSPopup = document.getElementById("add-us-popup");
+const usContainer = document.getElementById("us-items");
+const viewUSPopup = document.getElementById("view-us-popup");
+const editUSPopup = document.getElementById("edit-us-popup");
+
+const high = "rgb(240,128,128)";
+const medium = "rgb(255,250,205)";
+const low = "rgb(152,251,152)";
 
 // Add User Story Popup
 function openAddUSPopup() {
-    let popup = document.getElementById("add-us-popup");
-    popup.classList.add("active");
+    addUSPopup.classList.add("active");
     overlay.classList.add("active");
 }
 
 function closeAddUSPopup() {
-    let popup = document.getElementById("add-us-popup");
-    popup.classList.remove("active");
+    addUSPopup.classList.remove("active");
     overlay.classList.remove("active");
 }
 
@@ -33,6 +40,7 @@ function addUS() {
     if (desc) {
         us.description = desc;
     }
+
     appStorage.usList.push(us);
     updateLocalStorage(APP_DATA_KEY, appStorage);
     addUSCard(us, appStorage.usList.length - 1);
@@ -40,14 +48,15 @@ function addUS() {
     closeAddUSPopup();
 }
 
+// Clear input data
 function clearAddUSData() {
     document.getElementById("add-us-title").value = "";
     document.getElementById("add-us-priority").value = "";
     document.getElementById("add-us-description").value = "";
 }
 
+// Displays user story card
 function addUSCard(us, id) {
-    let usContainer = document.getElementById("us-items");
     let color = low;
     if (us.priority == "High") {
         color = high;
@@ -66,7 +75,7 @@ function addUSCard(us, id) {
         spColor = high;
     }
 
-    let card = `<div class="us-card" id="us-${id}" onclick="viewUSPopup(${id})">
+    let card = `<div class="us-card" id="us-${id}" onclick="openViewUSPopup(${id})">
                     <div class="us-card-header" style="background-color: ${color}">${us.title}</div>
                     <div class="us-card-content">
                         <div class="story-point" style="background-color: ${spColor};">SP ${us.storyPoint}</div>
@@ -77,53 +86,42 @@ function addUSCard(us, id) {
 }
 
 // View User Story Details
-function viewUSPopup(id) {
-    let title = document.getElementById("view-us-title");
-    let priority = document.getElementById("view-us-priority");
-    let description = document.getElementById("view-us-description");
-
+function openViewUSPopup(id) {
     let us = appStorage.usList[id];
-    title.innerHTML = us.title;
-    priority.innerHTML = us.priority;
-    description.innerHTML = us.description;
+    document.getElementById("view-us-title").innerHTML = us.title;
+    document.getElementById("view-us-priority").innerHTML = us.priority;
+    document.getElementById("view-us-description").innerHTML = us.description;
 
     document.getElementById("view-us-button-container").innerHTML = `<div class="view-us-edit-button">
                                                                         <button onclick="editUS(${id})">Edit User Story</button>
                                                                     </div>`
 
-    let popup = document.getElementById("view-us-popup");
-    popup.classList.add("active");
+    viewUSPopup.classList.add("active");
     overlay.classList.add("active");
 }
 
 function closeViewUSPopup() {
-    let popup = document.getElementById("view-us-popup");
-    popup.classList.remove("active");
+    viewUSPopup.classList.remove("active");
     overlay.classList.remove("active");
 }
 
+// Edit User Story
 function editUS(id) {
     document.getElementById("edit-us-title").value = appStorage.usList[id].title;
     document.getElementById("edit-us-priority").value = appStorage.usList[id].priority;
     document.getElementById("edit-us-description").value = appStorage.usList[id].description;
 
     document.getElementById("edit-us-button-container").innerHTML = `<button onclick="editUSApply(${id})">Apply</button>
-    <button onclick="closeEditUS()">Cancel</button>
-    <button onclick="deleteUS(${id})">Delete</button>`
+                                                                    <button onclick="closeEditUS()">Cancel</button>
+                                                                    <button onclick="deleteUS(${id})">Delete</button>`
 
-    let viewPopup = document.getElementById("view-us-popup");
-    viewPopup.classList.remove("active");
-
-    let editPopup = document.getElementById("edit-us-popup");
-    editPopup.classList.add("active");
+    viewUSPopup.classList.remove("active");
+    editUSPopup.classList.add("active");
 }
 
 function closeEditUS() {
-    let editPopup = document.getElementById("edit-us-popup");
-    editPopup.classList.remove("active");
-
-    let viewPopup = document.getElementById("view-us-popup");
-    viewPopup.classList.add("active");
+    editUSPopup.classList.remove("active");
+    viewUSPopup.classList.add("active");
 }
 
 function editUSApply(id) {
@@ -139,16 +137,16 @@ function editUSApply(id) {
     window.location.reload();
 }
 
+// Delete User Story
 function deleteUS(id) {
     appStorage.usList.splice(id, 1);
     updateLocalStorage(APP_DATA_KEY, appStorage);
     window.location.reload();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 let appStorage = new Storage();
-const high = "rgb(240,128,128)";
-const medium = "rgb(255,250,205)";
-const low = "rgb(152,251,152)";
 
 if (localStorageChecker(APP_DATA_KEY) == true) {
     appStorage.fromData(takeData(APP_DATA_KEY));
