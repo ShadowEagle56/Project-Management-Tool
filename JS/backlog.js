@@ -145,6 +145,91 @@ function deleteUS(id) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// Tasks /////////////////////////////////////
+const addTaskPopup = document.getElementById("add-task-popup");
+const taskContainer = document.getElementById("task-items");
+let selectingUS = false;
+
+function openAddTaskPopup() {
+    addTaskPopup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+function closeAddTaskPopup() {
+    addTaskPopup.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+function clearAddTaskData() {
+    document.getElementById("add-task-title").value = "";
+    document.getElementById("add-task-member").value = "";
+    document.getElementById("add-task-priority").value = "";
+    document.getElementById("add-task-type").value = "";
+    document.getElementById("add-task-description").value = "";
+    document.getElementById("add-task-sp").value = 0;
+}
+
+function addTaskCard(task, id) {
+    let color = low;
+    if (task.priority == "High") {
+        color = high;
+    } else if (task.priority == "Medium") {
+        color = medium;
+    } else if (task.priority == "Low") {
+        color = low;
+    }
+
+    let spColor = "white";
+    if (task.storyPoint <= 10 && task.storyPoint > 0) {
+        spColor = low;
+    } else if (task.storyPoint > 10 && task.storyPoint <= 40) {
+        spColor = medium;
+    } else if (task.storyPoint > 40) {
+        spColor = high;
+    }
+
+    let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
+    let shortenMember = (task.member) ? member(task.member).slice(0,2) : ""
+
+    let card = `<div class="task-card" id="task-${id}">
+                    <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
+                    <div class="task-card-content">
+                        <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
+                        <div class="task-member-container">${shortenMember}</div>
+                    </div>
+                </div>`
+
+    taskContainer.insertAdjacentHTML('beforeend', card);
+}
+
+function addTask() {
+    let title = document.getElementById("add-task-title").value;
+    let member = document.getElementById("add-task-member").value;
+    let priority = document.getElementById("add-task-priority").value;
+    let sp = document.getElementById("add-task-sp").value;
+    let type = document.getElementById("add-task-type").value;
+    let description = document.getElementById("add-task-description").value;
+
+    let task = new Task(title, priority);
+    if (member) {
+        task.member = member;
+    }
+    if (type) {
+        task.type = type;
+    }
+    if (description) {
+        task.description = description;
+    }
+    if (sp) {
+        task.storyPoint = sp;
+    }
+
+    appStorage.taskList.push(task);
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    addTaskCard(task, appStorage.taskList.length - 1);
+    clearAddTaskData();
+    closeAddTaskPopup();
+}
 
 let appStorage = new Storage();
 

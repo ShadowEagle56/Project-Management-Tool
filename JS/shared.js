@@ -36,6 +36,9 @@ class Storage {
             let task = new Task();
             task.fromData(listObj._taskList[i]);
             this._taskList.push(task);
+            if (window.location.href.includes("backlog.html")) {
+                addTaskCard(task, i);
+            }
         }
 
         for (let i in listObj._usList) {
@@ -127,6 +130,7 @@ class Task {
         this._sprint;
         this._timeSpent;
         this._totalHour;
+        this._userStory;
     };
 
     // Getters
@@ -144,6 +148,7 @@ class Task {
     get sprint() { return this._sprint; };
     get timeSpent() { return this._timeSpent; };
     get totalHour() { return this._totalHour; };
+    get userStory() { return this._userStory; };
 
     // Setters
     set title(newTitle) { this._title = newTitle; };
@@ -158,6 +163,7 @@ class Task {
     set index(newIndex) { this._index = newIndex; };
     set status(newStatus) { this._status = newStatus; };
     set sprint(newSprint) { this._sprint = newSprint; };
+    set userStory(newUS) { this._userStory = newUS; };
 
     // Methods
     addRecord(date, hour, minute) {
@@ -183,6 +189,7 @@ class Task {
         this._status = taskObj._status;
         this._sprint = taskObj._sprint;
         this._timeSpent = taskObj._timeSpent;
+        this._userStory = taskObj._userStory;
     };
 };
 
@@ -192,6 +199,8 @@ class UserStory {
         this._priority = p;
         this._storyPoint = 0;
         this._description = "";
+        this._tasks = [];
+        this._id = 0;
     }
 
     // Getters
@@ -199,12 +208,15 @@ class UserStory {
     get priority() { return this._priority; };
     get storyPoint() { return this._storyPoint; };
     get description() { return this._description; };
+    get tasks() { return this._tasks; };
+    get id() { return this._id; };
 
     // Setters
     set title(newTitle) { this._title = newTitle; };
     set priority(newP) { this._priority = newP; };
     set storyPoint(newSP) { this._storyPoint = newSP; };
     set description(newDesc) { this._description = newDesc; };
+    set id(newId) { this._id = newId; };
 
     // Methods
     fromData(usObj) {
@@ -212,6 +224,8 @@ class UserStory {
         this._priority = usObj._priority;
         this._storyPoint = usObj._storyPoint;
         this._description = usObj._description;
+        this._tasks = usObj._tasks;
+        this._id = usObj._id;
     };
 }
 

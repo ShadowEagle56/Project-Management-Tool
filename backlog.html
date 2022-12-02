@@ -19,7 +19,7 @@
         <div class="backlog-main">
             <div class="container1">
                 <button>Filter</button>
-                <button>Add Label</button>
+                <button>Add Type</button>
             </div>
 
             <div class="container2">
@@ -41,33 +41,11 @@
                 <div class="container-header">
                     <div>Product Backlog</div>
                     <div>
-                        <button class="add">&plus;</button>
+                        <button class="add" onclick="openAddTaskPopup()">&plus;</button>
                     </div>
                 </div>
 
-                <div class="task-items">
-                    <!-- Temporary place holder -->
-                    <div class="task-card" id="task-0">
-                        <div class="task-card-header" style="background-color: lightyellow;">Task 1</div>
-                        <div class="task-card-content">
-                            <div class="story-point" style="background-color: rgb(212, 248, 204);">SP 2</div>
-                        </div>
-                    </div>
-
-                    <div class="task-card" id="task-1">
-                        <div class="task-card-header" style="background-color: lightgreen;">Task 2</div>
-                        <div class="task-card-content">
-                            <div class="story-point" style="background-color: rgb(212, 248, 204);">SP 2</div>
-                        </div>
-                    </div>
-
-                    <div class="task-card" id="task-2">
-                        <div class="task-card-header" style="background-color: lightcoral;">Task 3</div>
-                        <div class="task-card-content">
-                            <div class="story-point" style="background-color: rgb(212, 248, 204);">SP 2</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="task-items" id="task-items"></div>
             </div>
         </div>
     </body>
@@ -170,6 +148,61 @@
             <button>Apply</button>
             <button onclick="closeEditUS()">Cancel</button>
             <button>Delete</button>
+        </div>
+    </div>
+
+    <!-- Add Task Popup -->
+    <div class="add-task-popup" id="add-task-popup">
+        <div class="add-task-popup-header">
+            <div class="popup-title">Add Task</div>
+            <div>
+                <button class="close-button" onclick="closeAddTaskPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="add-task-popup-body">
+            <div class="task-title">Title:</div>
+            <div class="task-input">
+                <input type="text" placeholder="Title..." id="add-task-title" class="input-text">
+            </div>
+
+            <div class="task-title">Member:</div>
+            <div class="task-input">
+                <select name="member-list" id="add-task-member">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+
+            <div class="task-title">Priority:</div>
+            <div class="task-input">
+                <select name="priority-list" id="add-task-priority">
+                    <option value="">Select an option</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="task-title">Story Point: </div>
+            <div class="task-input">
+                <input type="number" id="add-task-sp" value="0" class="textbox" min="0">
+            </div>
+
+            <div class="task-title">Type:</div>
+            <div class="task-input">
+                <select name="type-list" id="add-task-type">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+
+            <div class="task-title">Description:</div>
+            <div class="task-input">
+                <textarea placeholder="Description..." id="add-task-description" class="input-text"></textarea>
+            </div>
+        </div>
+
+        <div class="add-task-submit">
+            <button onclick="addTask()">Add Task</button>
         </div>
     </div>
 

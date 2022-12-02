@@ -65,6 +65,7 @@
 }
 
 .story-point {
+    align-self: flex-start;
     border: 0.5px solid black;
     max-width: 50px;
     text-align: center;
@@ -111,6 +112,21 @@
 
 .task-card-content {
     padding: 10px 10px 20px 10px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: flex-end;
+    column-gap: 10px;
+}
+
+.task-member-container {
+    grid-column: 2;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    border: 0.5px solid black;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 900px) {
@@ -199,7 +215,7 @@
 }
 
 /* User Story Popup */
-.add-us-popup, .view-us-popup, .edit-us-popup {
+.add-us-popup, .view-us-popup, .edit-us-popup, .add-task-popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -213,7 +229,7 @@
     transform: translate(-50%, -50%) scale(0);
 }
 
-.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header {
+.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header {
     display: grid;
     grid-template-columns: 30fr 1fr;
     font-weight: bold;
@@ -225,7 +241,7 @@
     float: right;
 }
 
-.add-us-popup-body, .view-us-popup-body, .edit-us-popup-body {
+.add-us-popup-body, .view-us-popup-body, .edit-us-popup-body, .add-task-popup-body {
     margin-top: 10px;
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -247,11 +263,11 @@
     width: 100%;
 }
 
-.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active {
+.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.add-us-submit {
+.add-us-submit, .add-task-submit {
     padding-top: 20px;
     justify-self: center;
 }
