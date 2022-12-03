@@ -118,7 +118,7 @@ class Task {
     constructor (title, p){
         this._title = title;
         this._member;
-        this._description;
+        this._description = "";
         this._priority = p;
         this._storyPoint = 0;
         this._labels = [];

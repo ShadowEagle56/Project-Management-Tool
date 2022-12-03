@@ -15,6 +15,8 @@ const addUSPopup = document.getElementById("add-us-popup");
 const usContainer = document.getElementById("us-items");
 const viewUSPopup = document.getElementById("view-us-popup");
 const editUSPopup = document.getElementById("edit-us-popup");
+const viewTaskPopup = document.getElementById("view-task-popup");
+const editTaskPopup = document.getElementById("edit-task-popup");
 
 const high = "rgb(240,128,128)";
 const medium = "rgb(255,250,205)";
@@ -189,9 +191,9 @@ function addTaskCard(task, id) {
     }
 
     let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
-    let shortenMember = (task.member) ? member(task.member).slice(0,2) : ""
+    let shortenMember = (task.member) ? member(task.member).slice(0,2) : "N/A"
 
-    let card = `<div class="task-card" id="task-${id}">
+    let card = `<div class="task-card" id="task-${id}" onclick="openViewTaskPopup(${id})">
                     <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
                     <div class="task-card-content">
                         <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
@@ -229,6 +231,33 @@ function addTask() {
     addTaskCard(task, appStorage.taskList.length - 1);
     clearAddTaskData();
     closeAddTaskPopup();
+}
+
+// View Task Details
+function openViewTaskPopup(id) {
+    let task = appStorage.taskList[id];
+    document.getElementById("view-task-title").innerHTML = task.title;
+    document.getElementById("view-task-member").innerHTML = task.member;
+    document.getElementById("view-task-priority").innerHTML = task.priority;
+    document.getElementById("view-task-sp").innerHTML = task.storyPoint;
+    document.getElementById("view-task-title").innerHTML = task.title;
+    document.getElementById("view-task-description").innerHTML = task.description;
+
+    document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
+                                                                        <button onclick="editTask(${id})">Edit Task</button>
+                                                                    </div>`
+
+    viewTaskPopup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+function closeViewTaskPopup() {
+    viewTaskPopup.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+function editTask(id) {
+
 }
 
 let appStorage = new Storage();
