@@ -191,7 +191,8 @@ function addTaskCard(task, id) {
     }
 
     let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
-    let shortenMember = (task.member) ? member(task.member).slice(0,2) : "N/A"
+    let name = task.member._firstName + " " + task.member._lastName;
+    let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
 
     let card = `<div class="task-card" id="task-${id}" onclick="openViewTaskPopup(${id})">
                     <div class="task-card-header" style="background-color: ${color};">${task.title}</div>

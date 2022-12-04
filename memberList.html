@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="CSS/shared.css">
         <link rel="stylesheet" href="CSS/memberList.css">
     </head>
-    <body>
+    <body onload="loadData();">
         <div class="header">
             <a href="login.html" class="logo">PMT</a>
             <div class="header-right">
@@ -23,12 +23,12 @@
             <div class="member-container" id="member-container"></div>
 
             <div class="incomplete-task-counter">
-                <p class="counter" id="incomplete-tasks">0</p>
+                <p class="counter" id="incomplete-tasks"></p>
                 <p>Incompleted Tasks</p>
             </div>
 
             <div class="complete-task-counter">
-                <p class="counter" id="complete-tasks">0</p>
+                <p class="counter" id="complete-tasks"></p>
                 <p>Completed Tasks</p>
             </div>
 

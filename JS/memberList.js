@@ -58,7 +58,7 @@ function addMemberCard(member, id) {
         contribution += member.contribution[i];
     }
 
-    let card = `<div class="member-card" id="member-${id}">
+    let card = `<div class="member-card" id="member-${id}" onclick="redirectMember(${id})">
                     <div class="role">${role(member.role).slice(0,2)}</div>
                     <div class="card-name">${member.firstName + " " + member.lastName}</div>
                     <div class="card-sp">SP ${member.totalStoryPoint}</div>
@@ -67,6 +67,27 @@ function addMemberCard(member, id) {
     
     memberContainer.insertAdjacentHTML('beforeend', card);
 }
+
+function loadData() {
+    let incomplete = 0;
+    let complete = 0;
+    for (let i=0; i < appStorage.taskList.length; i++) {
+        if (appStorage.taskList[i] != "Complete") {
+            incomplete += 1;
+        } else {
+            complete += 1;
+        }
+    }
+    document.getElementById("incomplete-tasks").innerHTML = incomplete;
+    document.getElementById("complete-tasks").innerHTML = complete;
+}
+
+function redirectMember(id) {
+    appStorage.selectedMember = id;
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location = "member.html";
+}
+
 
 let appStorage = new Storage();
 

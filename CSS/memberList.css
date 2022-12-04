@@ -24,6 +24,8 @@
 
 .member-card {
     border: 1px solid black;
+    border-radius: .25rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
     padding: 15px;
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -56,6 +58,7 @@
     font-size: larger;
     grid-column: 2;
 }
+
 .card-sp, .card-contribution {
     grid-column: 2;
 }

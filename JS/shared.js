@@ -126,10 +126,10 @@ class Task {
         this._startDate;
         this._endDate;
         this._index;
-        this._status;
+        this._status = "To Do";
         this._sprint;
         this._timeSpent;
-        this._totalHour;
+        this._totalHour = 0;
         this._userStory;
     };
 
