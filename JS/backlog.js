@@ -191,7 +191,7 @@ function addTaskCard(task, id) {
     }
 
     let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
-    let name = task.member._firstName + " " + task.member._lastName;
+    let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
     let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
 
     let card = `<div class="task-card" id="task-${id}" onclick="openViewTaskPopup(${id})">
@@ -238,10 +238,10 @@ function addTask() {
 function openViewTaskPopup(id) {
     let task = appStorage.taskList[id];
     document.getElementById("view-task-title").innerHTML = task.title;
-    document.getElementById("view-task-member").innerHTML = task.member;
+    document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
     document.getElementById("view-task-priority").innerHTML = task.priority;
     document.getElementById("view-task-sp").innerHTML = task.storyPoint;
-    document.getElementById("view-task-title").innerHTML = task.title;
+    // document.getElementById("view-task-type").innerHTML = task.type;
     document.getElementById("view-task-description").innerHTML = task.description;
 
     document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
@@ -257,8 +257,51 @@ function closeViewTaskPopup() {
     overlay.classList.remove("active");
 }
 
-function editTask(id) {
+function closeEditTaskPopup() {
+    editTaskPopup.classList.remove("active");
+    viewTaskPopup.classList.add("active");
+}
 
+function editTask(id) {
+    viewTaskPopup.classList.remove("active");
+    editTaskPopup.classList.add("active");
+
+    document.getElementById("edit-task-title").value = appStorage.taskList[id].title;
+    // To be added
+    // document.getElementById("edit-task-member").value = appStorage.taskList[id].member;
+    document.getElementById("edit-task-priority").value = appStorage.taskList[id].priority;
+    document.getElementById("edit-task-sp").value = appStorage.taskList[id].storyPoint;
+    // document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
+    document.getElementById("edit-task-description").value = appStorage.taskList[id].description;
+
+    document.getElementById("edit-task-submit").innerHTML = `<button>Assign to User Story</button>
+                                                            <button onclick="editTaskApply(${id})">Apply</button>
+                                                            <button onclick="closeEditTaskPopup()">Cancel</button>
+                                                            <button onclick="deleteTask(${id})">Delete</button>`
+}
+
+function editTaskApply(id) {
+    let title = document.getElementById("edit-task-title").value;
+    let member = document.getElementById("edit-task-title").value;
+    let priority = document.getElementById("edit-task-priority").value;
+    let sp = document.getElementById("edit-task-sp").value;
+    let type = document.getElementById("edit-task-type").value;
+    let desc = document.getElementById("edit-task-description").value
+
+    appStorage.taskList[id].title = title;
+    appStorage.taskList[id].member = member;
+    appStorage.taskList[id].priority = priority;
+    appStorage.taskList[id].sp = sp;
+    appStorage.taskList[id].type = type;
+    appStorage.taskList[id].description = desc;
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.reload();
+}
+
+function deleteTask(id) {
+    appStorage.taskList.splice(id, 1);
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.reload();
 }
 
 let appStorage = new Storage();

@@ -240,6 +240,60 @@
         </div>
     </div>
 
+    <!-- Edit Task Popup -->
+    <div class="edit-task-popup" id="edit-task-popup">
+        <div class="add-task-popup-header">
+            <div class="popup-title">Edit Task</div>
+            <div>
+                <button class="close-button" onclick="closeEditTaskPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="edit-task-popup-body">
+            <div class="task-title">Title:</div>
+            <div class="task-input">
+                <input type="text" placeholder="Title..." id="edit-task-title" class="input-text">
+            </div>
+
+            <div class="task-title">Member:</div>
+            <div class="task-input">
+                <select name="member-list" id="edit-task-member">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+
+            <div class="task-title">Priority:</div>
+            <div class="task-input">
+                <select name="priority-list" id="edit-task-priority">
+                    <option value="">Select an option</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="task-title">Story Point: </div>
+            <div class="task-input">
+                <input type="number" id="edit-task-sp" value="0" class="textbox" min="0">
+            </div>
+
+            <div class="task-title">Type:</div>
+            <div class="task-input">
+                <select name="type-list" id="edit-task-type">
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+
+            <div class="task-title">Description:</div>
+            <div class="task-input">
+                <textarea placeholder="Description..." id="edit-task-description" class="input-text"></textarea>
+            </div>
+        </div>
+
+        <div class="edit-task-submit" id="edit-task-submit">
+        </div>
+    </div>
+
     <script src="JS/shared.js"></script>
     <script src="JS/backlog.js"></script>
 </html>
