@@ -7,6 +7,7 @@ class Storage {
         this._taskList = [];
         this._usList = [];
         this._sprintList = [];
+        this._typeList = [];
     };
 
     // Getters
@@ -16,6 +17,7 @@ class Storage {
     get taskList() { return this._taskList; };
     get usList() { return this._usList; };
     get sprintList() { return this._sprintList; };
+    get typeList() { return this._typeList; };
 
     // Setters
     set memberLoggedIn(member) { this._memberLoggedIn = member; };

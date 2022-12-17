@@ -9,6 +9,24 @@ function userProfile() {
     window.location.replace('member.html')
 }
 
+function loadData() {
+    let addTaskMember = document.getElementById("add-task-member");
+    let editTaskMember = document.getElementById("edit-task-member");
+    for (let i = 0; i < appStorage.memberList.length; i++) {
+        let name = appStorage.memberList[i].firstName + " " + appStorage.memberList[i].lastName;
+        let opt = `<option value="${i}">${name}</option>`
+        addTaskMember.insertAdjacentHTML('beforeend', opt);
+        editTaskMember.insertAdjacentHTML('beforeend', opt);
+    }
+
+    let typeDropdown = document.getElementById("add-task-type");
+    for (let i = 0; i < appStorage.typeList.length; i++) {
+        let name = appStorage.memberList[i].firstName + " " + appStorage.memberList[i].lastName;
+        let opt = `<option value="${i}">${name}</option>`
+        typeDropdown.insertAdjacentHTML('beforeend', opt)
+    }
+}
+
 ////////////////////////////////// User Story //////////////////////////////////
 const overlay = document.getElementById("overlay");
 const addUSPopup = document.getElementById("add-us-popup");
@@ -215,7 +233,7 @@ function addTask() {
 
     let task = new Task(title, priority);
     if (member) {
-        task.member = member;
+        task.member = appStorage.memberList[member];
     }
     if (type) {
         task.type = type;
@@ -266,9 +284,17 @@ function editTask(id) {
     viewTaskPopup.classList.remove("active");
     editTaskPopup.classList.add("active");
 
+    let index = 0;
+
+    for(let i = 0; i < appStorage.memberList.length; i++){
+        if (appStorage.taskList[id].member == appStorage.memberList[i]){
+            index = i;
+        }
+    }
+
     document.getElementById("edit-task-title").value = appStorage.taskList[id].title;
     // To be added
-    // document.getElementById("edit-task-member").value = appStorage.taskList[id].member;
+    document.getElementById("edit-task-member").value = index;
     document.getElementById("edit-task-priority").value = appStorage.taskList[id].priority;
     document.getElementById("edit-task-sp").value = appStorage.taskList[id].storyPoint;
     // document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
@@ -282,14 +308,14 @@ function editTask(id) {
 
 function editTaskApply(id) {
     let title = document.getElementById("edit-task-title").value;
-    let member = document.getElementById("edit-task-title").value;
+    let member = document.getElementById("edit-task-member").value;
     let priority = document.getElementById("edit-task-priority").value;
     let sp = document.getElementById("edit-task-sp").value;
     let type = document.getElementById("edit-task-type").value;
     let desc = document.getElementById("edit-task-description").value
 
     appStorage.taskList[id].title = title;
-    appStorage.taskList[id].member = member;
+    appStorage.taskList[id].member = appStorage.memberList[member];
     appStorage.taskList[id].priority = priority;
     appStorage.taskList[id].sp = sp;
     appStorage.taskList[id].type = type;
@@ -311,3 +337,5 @@ if (localStorageChecker(APP_DATA_KEY) == true) {
 } else {
     updateLocalStorage(APP_DATA_KEY, appStorage);
 };
+
+console.log(appStorage)
