@@ -62,6 +62,16 @@ class Storage {
         this._memberLoggedIn = listObj._memberLoggedIn;
         this._selectedMember = listObj._selectedMember;
     };
+
+    removeItem(data, key){
+        if(data = sprintList){
+            for(let i in listObj._sprintList){
+                if(i.title == key){
+                    listObj._sprintList;
+                }
+            }
+        }
+    }
 }
 
 // Member class that stores individual member data

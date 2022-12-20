@@ -19,12 +19,32 @@
             <div class="button-container">
                 <button>Filter</button>
                 <button onclick="openAddSprintPopup()">Add Sprint</button>
+                <button onclick="openDelSprintPopup()">Delete Sprint</button>
             </div>
             <div class="sprint-container" id="sprint-container"></div>
         </div>
     </body>
 
     <div class="overlay" id="overlay"></div>
+
+    <!-- Delete Sprint Popup-->
+    <div class="add-sprint-popup" id="delete-sprint-popup">
+        <div class="add-sprint-popup-header">
+            <div class="popup-title">Delete Sprint</div>
+            <div>
+                <button class="close-button" onclick="closeDelSprintPopup()">&times;</button>
+            </div>
+        </div>
+        <div class="add-sprint-popup-body">
+            <div class="sprint-title">Title:</div>
+                <div class="sprint-input">
+                    <input type="text" placeholder="Title" id="del-title" class="input-text">
+                </div>
+            <div class="add-sprint-submit">
+                <button onclick="deleteSprint()">Delete Sprint</button>
+            </div> 
+        </div>
+    </div>
 
     <!-- Add Sprint Popup -->
     <div class="add-sprint-popup" id="add-sprint-popup">
