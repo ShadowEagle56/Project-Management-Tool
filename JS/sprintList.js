@@ -50,7 +50,7 @@ function addSprint() {
 
 function deleteSprint(){
     let sTitle = document.getElementById("del-title").value;
-    if(appStorage.sprintList[sTitle].title == sTitle){
+    if(appStorage.sprintList[sTitle].title == sTitle){  // check if such sprint exists, need to fix
         appStorage.sprintList.splice(sTitle, 1)
     };
     updateLocalStorage(APP_DATA_KEY, appStorage);
