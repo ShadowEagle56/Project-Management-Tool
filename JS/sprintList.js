@@ -41,7 +41,7 @@ function addSprint() {
 
     // trying different method
     let sprint = new Sprint(title, startDate, endDate)
-    appStorage.sprintList[title] = sprint;  // this is an array, not dictionary
+    appStorage.sprintList[title] = sprint;  // this is an array, not dict
     updateLocalStorage(APP_DATA_KEY, appStorage);
     addSprintCard(sprint, title);
     closeAddSprintPopup();
