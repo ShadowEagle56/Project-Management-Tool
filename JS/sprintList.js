@@ -39,9 +39,8 @@ function addSprint() {
     let startDate = document.getElementById("add-sprint-start-date").value;
     let endDate = document.getElementById("add-sprint-end-date").value;
 
-    // trying different method
     let sprint = new Sprint(title, startDate, endDate)
-    appStorage.sprintList[title] = sprint;  // this is an array, not dict
+    appStorage.sprintList.push(sprint)
     updateLocalStorage(APP_DATA_KEY, appStorage);
     addSprintCard(sprint, title);
     closeAddSprintPopup();
@@ -50,9 +49,7 @@ function addSprint() {
 
 function deleteSprint(){
     let sTitle = document.getElementById("del-title").value;
-    if(appStorage.sprintList[sTitle].title == sTitle){  // check if such sprint exists, need to fix
-        appStorage.sprintList.splice(sTitle, 1)
-    };
+    appStorage.removeItem("sprintList", sTitle);
     updateLocalStorage(APP_DATA_KEY, appStorage);
     document.getElementById("sprint-card-"+sTitle);
     closeDelSprintPopup()

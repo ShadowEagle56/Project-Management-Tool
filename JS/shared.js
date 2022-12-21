@@ -66,12 +66,15 @@ class Storage {
     };
 
     removeItem(data, key){
-        if(data = sprintList){
-            for(let i in listObj._sprintList){
-                if(i.title == key){
-                    listObj._sprintList;
+        if(data = "sprintList"){
+            for(let i = 0; i < this._sprintList.length; i++){
+                if(this._sprintList[i].title == key){
+                    this._sprintList.splice(i, 1);
+                    return true;
                 }
-            }
+            } return false;
+        } else{
+            return false;
         }
     }
 }
