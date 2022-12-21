@@ -13,7 +13,6 @@ const addSprintPopup = document.getElementById("add-sprint-popup");
 const delSprintPopup = document.getElementById("delete-sprint-popup");
 const overlay = document.getElementById("overlay");
 
-// may be able to unify functions, for now separate
 function openAddSprintPopup() {
     addSprintPopup.classList.add("active");
     overlay.classList.add("active");
@@ -21,16 +20,6 @@ function openAddSprintPopup() {
 
 function closeAddSprintPopup() {
     addSprintPopup.classList.remove("active");
-    overlay.classList.remove("active");
-}
-
-function openDelSprintPopup(){
-    delSprintPopup.classList.add("active");
-    overlay.classList.add("active");
-}
-
-function closeDelSprintPopup(){
-    delSprintPopup.classList.remove("active");
     overlay.classList.remove("active");
 }
 
@@ -47,21 +36,23 @@ function addSprint() {
     clearAddSprintData();
 }
 
-function deleteSprint(){
-    let sTitle = document.getElementById("del-title").value;
-    appStorage.removeItem("sprintList", sTitle);
+function deleteSprint(sprintTitle){
+    appStorage.removeItem("sprintList", sprintTitle);
     updateLocalStorage(APP_DATA_KEY, appStorage);
-    document.getElementById("sprint-card-"+sTitle);
-    closeDelSprintPopup()
+    document.getElementById("sprint-card-"+sprintTitle);
     window.location.reload();
 }
 
 function addSprintCard(sprint, title) {
     let sprintContainer = document.getElementById("sprint-container");
+    // button is in the middle
     let card = `<div class="sprint-card" id="sprint-card-${title}">
                     <div class="card-title">${sprint.title}</div>
                     <div class="card-date">${sprint.startDate} - ${sprint.endDate}</div>
                     <div class="card-status">${sprint.status}</div>
+                    <div class="add-sprint-submit">
+                        <button class="close-button" onclick="deleteSprint('${sprint.title}')">Delete Sprint</button>
+                    </div>
                 </div>`
 
     sprintContainer.insertAdjacentHTML('beforeend', card);
