@@ -330,6 +330,19 @@ function deleteTask(id) {
     window.location.reload();
 }
 
+// Add Type
+const addTypePopup = document.getElementById("add-type-popup");
+
+function openAddTypePopup() {
+    addTypePopup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+function closeAddTypePopup() {
+    addTypePopup.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
 let appStorage = new Storage();
 
 if (localStorageChecker(APP_DATA_KEY) == true) {

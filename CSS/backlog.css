@@ -214,7 +214,7 @@
     }
 }
 
-/* User Story Popup */
+/* Popups */
 .add-us-popup, .view-us-popup, .edit-us-popup, .add-task-popup, .view-task-popup, .edit-task-popup {
     position: fixed;
     top: 50%;
@@ -229,7 +229,7 @@
     transform: translate(-50%, -50%) scale(0);
 }
 
-.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .view-task-popup-header, .edit-task-popup-header {
+.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .view-task-popup-header, .edit-task-popup-header, .add-type-popup-header {
     display: grid;
     grid-template-columns: 30fr 1fr;
     font-weight: bold;
@@ -263,7 +263,7 @@
     width: 100%;
 }
 
-.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .view-task-popup.active, .edit-task-popup.active {
+.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .view-task-popup.active, .edit-task-popup.active, .add-type-popup.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
@@ -284,6 +284,48 @@
 
 .view-us-delete-button {
     grid-column: 2;
+}
+
+/* Add Type Popup */
+.add-type-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    padding: 20px;
+    width: 400px;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.add-type-popup-body {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.type-colour-preview {
+    border: 1px solid black;
+    height: 20px;
+    width: 20px;
+}
+
+.type-title {
+    grid-column: 1;
+}
+
+.type-input {
+    grid-column: 2 / 6;
+}
+
+.add-type-submit {
+    justify-self: center;
 }
 
 #overlay {

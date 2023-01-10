@@ -19,7 +19,7 @@
         <div class="backlog-main">
             <div class="container1">
                 <button>Filter</button>
-                <button>Add Type</button>
+                <button onclick="openAddTypePopup()">Add Type</button>
             </div>
 
             <div class="container2">
@@ -293,6 +293,40 @@
         <div class="edit-task-submit" id="edit-task-submit">
         </div>
     </div>
+
+    <!-- Add Type Popup -->
+    <div class="add-type-popup" id="add-type-popup">
+        <div class="add-type-popup-header">
+            <div class="popup-title">Add Type</div>
+            <div>
+                <button class="close-button" onclick="closeAddTypePopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="add-type-popup-body">
+            <div class="type-title">Type Name:</div>
+            <div class="type-input">
+                <input type="text" placeholder="Title..." id="add-type-title" class="input-text">
+            </div>
+            <div class="type-title">Type Colour :</div>
+                <div class="type-colour-preview"></div>
+                <div class="type-colour-input">
+                    <input type="number" id="type-colour-red-value" min="0" max="255" value="0">
+
+                </div>
+                <div class="type-colour-input">
+                    <input type="number" id="type-colour-green-value" min="0" max="255" value="0">
+                </div>
+                <div class="type-colour-input">
+                    <input type="number" id="label-colour-blue-value" min="0" max="255" value="0">
+                </div>
+        </div>
+
+        <div class="add-type-submit">
+            <button onclick="addType()">Add Type</button>
+        </div>
+    </div>
+
 
     <script src="JS/shared.js"></script>
     <script src="JS/backlog.js"></script>
