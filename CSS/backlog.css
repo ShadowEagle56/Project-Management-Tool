@@ -229,7 +229,7 @@
     transform: translate(-50%, -50%) scale(0);
 }
 
-.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .view-task-popup-header, .edit-task-popup-header, .add-type-popup-header, .filter-popup-header {
+.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .view-task-popup-header, .edit-task-popup-header, .add-type-popup-header, .filter-popup-header, .legend-popup-header {
     display: grid;
     grid-template-columns: 30fr 1fr;
     font-weight: bold;
@@ -263,7 +263,7 @@
     width: 100%;
 }
 
-.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .view-task-popup.active, .edit-task-popup.active, .add-type-popup.active, .filter-popup.active {
+.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .view-task-popup.active, .edit-task-popup.active, .add-type-popup.active, .filter-popup.active, .legend-popup.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
@@ -351,6 +351,59 @@
 
 .type-input {
     grid-column: 2 / 6;
+}
+
+/* View Legend Popup */
+.legend-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    padding: 20px;
+    width: 400px;
+    transform: translate(-50%, -50%) scale(0);
+    row-gap: 20px;
+    padding-bottom: 40px;
+}
+
+.legend-popup-body {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.legend-title {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+.legend-container {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.legend-pair {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+}
+
+.legend-name {
+    justify-self: right;
+}
+
+.legend-color {
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
 }
 
 #overlay {

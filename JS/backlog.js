@@ -356,6 +356,19 @@ function closeAddTypePopup() {
     overlay.classList.remove("active");
 }
 
+// View Legend Popup
+const legendPopup = document.getElementById("legend-popup");
+
+function openLegendPopup() {
+    legendPopup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+function closeLegendPopup() {
+    legendPopup.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
 let appStorage = new Storage();
 
 if (localStorageChecker(APP_DATA_KEY) == true) {

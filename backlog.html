@@ -23,7 +23,7 @@
             </div>
 
             <div class="container2">
-                <button class="legend-button">View Legend</button>
+                <button class="legend-button" onclick="openLegendPopup()">View Legend</button>
             </div>
 
             <div class="us-container">
@@ -356,6 +356,37 @@
 
         <div class="add-type-submit">
             <button onclick="addType()">Add Type</button>
+        </div>
+    </div>
+
+    <!-- View Legend Popup -->
+    <div class="legend-popup" id="legend-popup">
+        <div class="legend-popup-header">
+            <div class="popup-title">View Legend</div>
+            <div>
+                <button class="close-button" onclick="closeLegendPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="legend-popup-body">
+            <div class="legend-title">Priority:</div>
+            <div class="legend-container">
+                <div class="legend-pair">
+                    <div class="legend-name">Low</div>
+                    <div class="legend-color" style="background-color: rgb(152,251,152);"></div>
+                </div>
+                <div class="legend-pair">
+                    <div class="legend-name">Medium</div>
+                    <div class="legend-color" style="background-color: rgb(255,250,205);"></div>
+                </div>
+                <div class="legend-pair">
+                    <div class="legend-name">High</div>
+                    <div class="legend-color" style="background-color: rgb(240,128,128);"></div>
+                </div>
+            </div>
+            <div class="legend-title">Type:</div>
+            <div class="legend-container" id="legend-type">
+            </div>
         </div>
     </div>
 
