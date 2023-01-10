@@ -305,20 +305,28 @@
 
         <div class="filter-popup-body">
             <div class="filter-title">Priority:</div>
-            <div class="filter-input">
-                <select name="priority-list" id="filter-priority">
-                    <option value="">Select an option</option>
+            <div>
+                <select name="priority-list" id="filter-priority" class="filter-input">
+                    <option value="">None</option>
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
                 </select>
             </div>
+
+            <div class="filter-title">Member:</div>
+            <div>
+                <select name="member-list" id="filter-member" class="filter-input">
+                    <option value="">None</option>
+                </select>
+            </div>
+
             <div class="type-title">Type:</div>
-                <div class="filter-input">
-                    <select name="type-list" id="filter-type" multiple>
-                        <option value="">Select an option</option>
-                    </select>
-                </div>
+            <div>
+                <select name="type-list" id="filter-type" class="filter-input">
+                    <option value="">None</option>
+                </select>
+            </div>
         </div>
 
         <div class="filter-submit">

@@ -12,11 +12,15 @@ function userProfile() {
 function loadData() {
     let addTaskMember = document.getElementById("add-task-member");
     let editTaskMember = document.getElementById("edit-task-member");
+    let filterMember = document.getElementById("filter-member");
+
+
     for (let i = 0; i < appStorage.memberList.length; i++) {
         let name = appStorage.memberList[i].firstName + " " + appStorage.memberList[i].lastName;
         let opt = `<option value="${i}">${name}</option>`
         addTaskMember.insertAdjacentHTML('beforeend', opt);
         editTaskMember.insertAdjacentHTML('beforeend', opt);
+        filterMember.insertAdjacentHTML('beforeend', opt);
     }
 
     let typeDropdown = document.getElementById("add-task-type");
@@ -330,7 +334,9 @@ function deleteTask(id) {
     window.location.reload();
 }
 
-// Filter
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// Filter ////////////////////////////////////
+
 const filterPopup = document.getElementById("filter-popup");
 
 function openFilterPopup() {
@@ -341,6 +347,15 @@ function openFilterPopup() {
 function closeFilterPopup() {
     filterPopup.classList.remove("active");
     overlay.classList.remove("active");
+}
+
+// Main filter function
+function filter() {
+    let priority = document.getElementById("filter-priority").value;
+    let members = document.getElementById("filter-member").value;
+    let type = document.getElementById("filter-type").value;
+
+    closeFilterPopup();
 }
 
 // Add Type

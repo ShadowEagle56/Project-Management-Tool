@@ -311,6 +311,10 @@
     justify-self: center;
 }
 
+.filter-input {
+    width: 100%;
+}
+
 .filter-submit, .add-type-submit {
     justify-self: center;
 }
