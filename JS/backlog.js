@@ -330,6 +330,19 @@ function deleteTask(id) {
     window.location.reload();
 }
 
+// Filter
+const filterPopup = document.getElementById("filter-popup");
+
+function openFilterPopup() {
+    filterPopup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+function closeFilterPopup() {
+    filterPopup.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
 // Add Type
 const addTypePopup = document.getElementById("add-type-popup");
 

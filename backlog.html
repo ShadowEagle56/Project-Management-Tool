@@ -18,7 +18,7 @@
 
         <div class="backlog-main">
             <div class="container1">
-                <button>Filter</button>
+                <button onclick="openFilterPopup()">Filter</button>
                 <button onclick="openAddTypePopup()">Add Type</button>
             </div>
 
@@ -294,6 +294,38 @@
         </div>
     </div>
 
+    <!-- Filter Popup -->
+    <div class="filter-popup" id="filter-popup">
+        <div class="filter-popup-header">
+            <div class="popup-title">Filter</div>
+            <div>
+                <button class="close-button" onclick="closeFilterPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="filter-popup-body">
+            <div class="filter-title">Priority:</div>
+            <div class="filter-input">
+                <select name="priority-list" id="filter-priority">
+                    <option value="">Select an option</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            <div class="type-title">Type:</div>
+                <div class="filter-input">
+                    <select name="type-list" id="filter-type" multiple>
+                        <option value="">Select an option</option>
+                    </select>
+                </div>
+        </div>
+
+        <div class="filter-submit">
+            <button onclick="filter()">Filter</button>
+        </div>
+    </div>
+
     <!-- Add Type Popup -->
     <div class="add-type-popup" id="add-type-popup">
         <div class="add-type-popup-header">
@@ -308,7 +340,7 @@
             <div class="type-input">
                 <input type="text" placeholder="Title..." id="add-type-title" class="input-text">
             </div>
-            <div class="type-title">Type Colour :</div>
+            <div class="type-title">Type Colour:</div>
                 <div class="type-colour-preview"></div>
                 <div class="type-colour-input">
                     <input type="number" id="type-colour-red-value" min="0" max="255" value="0">

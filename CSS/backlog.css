@@ -229,7 +229,7 @@
     transform: translate(-50%, -50%) scale(0);
 }
 
-.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .view-task-popup-header, .edit-task-popup-header, .add-type-popup-header {
+.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .view-task-popup-header, .edit-task-popup-header, .add-type-popup-header, .filter-popup-header {
     display: grid;
     grid-template-columns: 30fr 1fr;
     font-weight: bold;
@@ -263,7 +263,7 @@
     width: 100%;
 }
 
-.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .view-task-popup.active, .edit-task-popup.active, .add-type-popup.active {
+.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .view-task-popup.active, .edit-task-popup.active, .add-type-popup.active, .filter-popup.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
@@ -284,6 +284,35 @@
 
 .view-us-delete-button {
     grid-column: 2;
+}
+
+/* Filter Popup */
+.filter-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    padding: 20px;
+    width: 250px;
+    transform: translate(-50%, -50%) scale(0);
+    row-gap: 20px;
+}
+
+.filter-popup-body {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.filter-submit, .add-type-submit {
+    justify-self: center;
 }
 
 /* Add Type Popup */
@@ -322,10 +351,6 @@
 
 .type-input {
     grid-column: 2 / 6;
-}
-
-.add-type-submit {
-    justify-self: center;
 }
 
 #overlay {
