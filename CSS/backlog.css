@@ -319,6 +319,10 @@
     justify-self: center;
 }
 
+.filter-hidden {
+    display: none;
+}
+
 /* Add Type Popup */
 .add-type-popup {
     position: fixed;
