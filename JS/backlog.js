@@ -352,8 +352,63 @@ function closeFilterPopup() {
 // Main filter function
 function filter() {
     let priority = document.getElementById("filter-priority").value;
-    let members = document.getElementById("filter-member").value;
+    let member = document.getElementById("filter-member").value;
     let type = document.getElementById("filter-type").value;
+
+    let usList = appStorage.usList;
+    let taskList = appStorage.taskList;
+
+    if (priority != "" || member != "" || type != "") {
+        // User Story
+        for (let i = 0; i < usList.length; i++) {
+            // Priority
+            if (usList[i].priority != priority && priority != "") {
+                let id = String(`us-${i}`);
+                document.getElementById(id).classList.add("filter-hidden");
+            }
+
+            if (usList[i].priority === priority || priority === "") {
+                let id = String(`us-${i}`);
+                document.getElementById(id).classList.remove("filter-hidden");
+            }
+        }
+
+        // Tasks
+        for (let i = 0; i < taskList.length; i++) {
+            let hide = false;
+
+            // Priority
+            if (taskList[i].priority != priority && priority != "") {
+                hide = true;
+            }
+
+            // Member
+            if ((taskList[i].member._firstName + " " + taskList[i].member._lastName) != (appStorage.memberList[member].firstName + " " + appStorage.memberList[member].lastName) && member != "") {
+                hide = true;
+            }
+
+            // Main filtering code
+            if (hide) {
+                let id = String(`task-${i}`);
+                document.getElementById(id).classList.add("filter-hidden");
+            } else {
+                let id = String(`task-${i}`);
+                document.getElementById(id).classList.remove("filter-hidden");
+            }
+        }
+    } else {
+        // User Story
+        for (let i = 0; i < usList.length; i++) {
+            let id = String(`us-${i}`);
+            document.getElementById(id).classList.remove("filter-hidden");
+        }
+
+        // Tasks
+        for (let i = 0; i < taskList.length; i++) {
+            let id = String(`task-${i}`);
+            document.getElementById(id).classList.remove("filter-hidden");
+        }
+    }
 
     closeFilterPopup();
 }
