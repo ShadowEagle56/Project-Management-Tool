@@ -322,10 +322,16 @@
             </div>
 
             <div class="type-title">Type:</div>
-            <div>
-                <select name="type-list" id="filter-type" class="filter-input">
-                    <option value="">None</option>
-                </select>
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                    <select class="filter-input">
+                        <option value="">None</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes-type">
+                    <!-- To be inserted -->
+                </div>
             </div>
         </div>
 
