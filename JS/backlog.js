@@ -362,7 +362,7 @@ function filter() {
         // User Story
         for (let i = 0; i < usList.length; i++) {
             // Priority
-            if (usList[i].priority != priority && priority != "") {
+            if (priority && usList[i].priority != priority) {
                 let id = String(`us-${i}`);
                 document.getElementById(id).classList.add("filter-hidden");
             }
@@ -378,12 +378,12 @@ function filter() {
             let hide = false;
 
             // Priority
-            if (taskList[i].priority != priority && priority != "") {
+            if (priority && taskList[i].priority != priority) {
                 hide = true;
             }
 
             // Member
-            if ((taskList[i].member._firstName + " " + taskList[i].member._lastName) != (appStorage.memberList[member].firstName + " " + appStorage.memberList[member].lastName) && member != "") {
+            if (member && ((taskList[i].member._firstName + " " + taskList[i].member._lastName) != (appStorage.memberList[member].firstName + " " + appStorage.memberList[member].lastName))) {
                 hide = true;
             }
 
