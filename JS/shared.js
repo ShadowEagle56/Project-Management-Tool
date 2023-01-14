@@ -273,6 +273,33 @@ class Sprint {
     }
 }
 
+// Type class
+class Type{
+    constructor(title, redVal, greenVal, blueVal){
+        this._title = title;
+        this._redVal = redVal;
+        this._greenVal = greenVal;
+        this._blueVal = blueVal;
+    }
+
+    get title() { return this._title };
+    get redVal() { return this._redVal };
+    get greenVal() { return this._greenVal };
+    get blueVal() { return this._blueVal };
+
+    set title(newTitle) { this._title = newTitle };
+    set redVal(newRed) { this._redVal = newRed };
+    set greenVal(newGreen) { this._greenVal = newGreen };
+    set blueVal(newBlue) { this._blueVal = newBlue} ;
+
+    fromData(typeObj){
+        this._title = typeObj.title;
+        this._redVal = typeObj.redVal;
+        this._greenVal = typeObj.greenVal;
+        this._blueVal = typeObj.blueVal;
+    }
+}
+
 // Upload data with the key into local storage
 function updateLocalStorage(key, data) {
     let dataString = JSON.stringify(data);  // Convert object into string

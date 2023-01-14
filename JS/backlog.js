@@ -356,6 +356,25 @@ function closeAddTypePopup() {
     overlay.classList.remove("active");
 }
 
+function clearAddTypeData(){
+    document.getElementById("add-type-title").value = "";
+    document.getElementById("type-colour-red-value").value = "";
+    document.getElementById("type-colour-green-value").value = "";
+    document.getElementById("type-colour-blue-value").value = "";
+}
+
+function addType(){
+    let title = document.getElementById("add-type-title").value;
+    let redVal = document.getElementById("type-colour-red-value").value;
+    let greenVal = document.getElementById("type-colour-green-value").value;
+    let blueVal = document.getElementById("type-colour-blue-value").value;
+
+    appStorage.typeList.push(new Type(title, redVal, greenVal, blueVal))
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    clearAddTypeData();
+    closeAddTypePopup();
+}
+
 // View Legend Popup
 const legendPopup = document.getElementById("legend-popup");
 
