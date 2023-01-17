@@ -173,11 +173,25 @@ let selectingUS = false;
 function openAddTaskPopup() {
     addTaskPopup.classList.add("active");
     overlay.classList.add("active");
+    // populate drop down
+    for(var i = 0; i < appStorage.typeList.length; i++){
+        var opt = appStorage.typeList[i];
+        var el = document.createElement("option");
+        el.setAttribute("id", opt.title)
+        el.textContent = opt.title;
+        el.value = opt.hexVal;
+        document.getElementById("add-task-type").appendChild(el);
+    }
 }
 
 function closeAddTaskPopup() {
     addTaskPopup.classList.remove("active");
     overlay.classList.remove("active");
+    // remove all types from the drop down
+    for(var i = 0; i < appStorage.typeList.length; i++){
+        var el = document.getElementById(appStorage.typeList[i].title);
+        document.getElementById("add-task-type").removeChild(el);
+    }
 }
 
 function clearAddTaskData() {
@@ -259,7 +273,7 @@ function openViewTaskPopup(id) {
     document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
     document.getElementById("view-task-priority").innerHTML = task.priority;
     document.getElementById("view-task-sp").innerHTML = task.storyPoint;
-    // document.getElementById("view-task-type").innerHTML = task.type;
+    document.getElementById("view-task-type").innerHTML = task.type.name;
     document.getElementById("view-task-description").innerHTML = task.description;
 
     document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
@@ -293,11 +307,10 @@ function editTask(id) {
     }
 
     document.getElementById("edit-task-title").value = appStorage.taskList[id].title;
-    // To be added
     document.getElementById("edit-task-member").value = index;
     document.getElementById("edit-task-priority").value = appStorage.taskList[id].priority;
     document.getElementById("edit-task-sp").value = appStorage.taskList[id].storyPoint;
-    // document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
+    document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
     document.getElementById("edit-task-description").value = appStorage.taskList[id].description;
 
     document.getElementById("edit-task-submit").innerHTML = `<button>Assign to User Story</button>
@@ -358,19 +371,15 @@ function closeAddTypePopup() {
 
 function clearAddTypeData(){
     document.getElementById("add-type-title").value = "";
-    document.getElementById("type-colour-red-value").value = "";
-    document.getElementById("type-colour-green-value").value = "";
-    document.getElementById("type-colour-blue-value").value = "";
+    document.getElementById("type-colour").value = "#000000";
 }
 
 function addType(){
     let title = document.getElementById("add-type-title").value;
-    let redVal = document.getElementById("type-colour-red-value").value;
-    let greenVal = document.getElementById("type-colour-green-value").value;
-    let blueVal = document.getElementById("type-colour-blue-value").value;
+    let hexVal = document.getElementById("type-colour").value;
 
-    appStorage.typeList.push(new Type(title, redVal, greenVal, blueVal))
-    updateLocalStorage(APP_DATA_KEY, appStorage);
+    appStorage.typeList.push(new Type(title, hexVal))
+    updateLocalStorage(APP_DATA_KEY, appStorage);  // not persistent
     clearAddTypeData();
     closeAddTypePopup();
 }

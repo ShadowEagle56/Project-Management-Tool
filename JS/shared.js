@@ -275,28 +275,20 @@ class Sprint {
 
 // Type class
 class Type{
-    constructor(title, redVal, greenVal, blueVal){
+    constructor(title, hexVal){
         this._title = title;
-        this._redVal = redVal;
-        this._greenVal = greenVal;
-        this._blueVal = blueVal;
+        this._hexVal = hexVal;
     }
 
     get title() { return this._title };
-    get redVal() { return this._redVal };
-    get greenVal() { return this._greenVal };
-    get blueVal() { return this._blueVal };
+    get hexVal() { return this._hexVal };
 
     set title(newTitle) { this._title = newTitle };
-    set redVal(newRed) { this._redVal = newRed };
-    set greenVal(newGreen) { this._greenVal = newGreen };
-    set blueVal(newBlue) { this._blueVal = newBlue} ;
+    set hexVal(newHex) { this._hexVal = newHex };
 
     fromData(typeObj){
         this._title = typeObj.title;
-        this._redVal = typeObj.redVal;
-        this._greenVal = typeObj.greenVal;
-        this._blueVal = typeObj.blueVal;
+        this._hexVal = typeObj.hexVal;
     }
 }
 
