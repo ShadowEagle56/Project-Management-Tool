@@ -61,6 +61,12 @@ class Storage {
             }
         }
 
+        for(let i in listObj._typeList){
+            let type = new Type();
+            type.fromData(listObj._typeList[i]);
+            this._sprintList.push(type);
+        }
+
         this._memberLoggedIn = listObj._memberLoggedIn;
         this._selectedMember = listObj._selectedMember;
     };

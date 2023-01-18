@@ -378,7 +378,7 @@ function addType(){
     let title = document.getElementById("add-type-title").value;
     let hexVal = document.getElementById("type-colour").value;
 
-    appStorage.typeList.push(new Type(title, hexVal))
+    appStorage.typeList.push(new Type(title, hexVal));
     updateLocalStorage(APP_DATA_KEY, appStorage);  // not persistent
     clearAddTypeData();
     closeAddTypePopup();
