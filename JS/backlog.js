@@ -20,11 +20,19 @@ function loadData() {
     }
 
     let typeDropdown = document.getElementById("add-task-type");
+    let typeLegend = document.getElementById("legend-type");
     for (let i = 0; i < appStorage.typeList.length; i++) {
-        let name = appStorage.memberList[i].firstName + " " + appStorage.memberList[i].lastName;
+        let name = appStorage.typeList[i].title;
         let opt = `<option value="${i}">${name}</option>`
         typeDropdown.insertAdjacentHTML('beforeend', opt)
+
+        let legend = `<div class="legend-pair">
+                        <div class="legend-name">${appStorage.typeList[i].title}</div>
+                        <div class="legend-color" style="background-color: ${appStorage.typeList[i].hexVal};"></div>
+                    </div>`
+        typeLegend.insertAdjacentHTML('beforeend', legend)
     }
+
 }
 
 ////////////////////////////////// User Story //////////////////////////////////
@@ -379,7 +387,7 @@ function addType(){
     let hexVal = document.getElementById("type-colour").value;
 
     appStorage.typeList.push(new Type(title, hexVal));
-    updateLocalStorage(APP_DATA_KEY, appStorage);  // not persistent
+    updateLocalStorage(APP_DATA_KEY, appStorage);
     clearAddTypeData();
     closeAddTypePopup();
 }

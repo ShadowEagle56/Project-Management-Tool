@@ -64,7 +64,7 @@ class Storage {
         for(let i in listObj._typeList){
             let type = new Type();
             type.fromData(listObj._typeList[i]);
-            this._sprintList.push(type);
+            this.typeList.push(type);
         }
 
         this._memberLoggedIn = listObj._memberLoggedIn;
@@ -293,8 +293,8 @@ class Type{
     set hexVal(newHex) { this._hexVal = newHex };
 
     fromData(typeObj){
-        this._title = typeObj.title;
-        this._hexVal = typeObj.hexVal;
+        this._title = typeObj._title;
+        this._hexVal = typeObj._hexVal;
     }
 }
 
