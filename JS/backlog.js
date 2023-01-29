@@ -19,12 +19,12 @@ function loadData() {
         editTaskMember.insertAdjacentHTML('beforeend', opt);
     }
 
-    let typeDropdown = document.getElementById("add-task-type");
+    // let typeDropdown = document.getElementById("add-task-type");
     let typeLegend = document.getElementById("legend-type");
     for (let i = 0; i < appStorage.typeList.length; i++) {
-        let name = appStorage.typeList[i].title;
-        let opt = `<option value="${i}">${name}</option>`
-        typeDropdown.insertAdjacentHTML('beforeend', opt)
+        // let name = appStorage.typeList[i].title;
+        // let opt = `<option value="${i}">${name}</option>`
+        // typeDropdown.insertAdjacentHTML('beforeend', opt)
 
         let legend = `<div class="legend-pair">
                         <div class="legend-name">${appStorage.typeList[i].title}</div>
