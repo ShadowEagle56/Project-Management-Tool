@@ -390,6 +390,7 @@ function addType(){
     updateLocalStorage(APP_DATA_KEY, appStorage);
     clearAddTypeData();
     closeAddTypePopup();
+    window.location.reload();
 }
 
 // View Legend Popup
