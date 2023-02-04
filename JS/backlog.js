@@ -283,11 +283,21 @@ function addTask() {
 // View Task Details
 function openViewTaskPopup(id) {
     let task = appStorage.taskList[id];
+    let types = task.type ? `<div class="task-pair">
+    <div class="task-type-name">${appStorage.typeList[0].title}</div>
+    <div class="task-type-color" style="background-color: ${appStorage.typeList[0].hexVal};"></div>
+</div>` : "";
+    for (let i = 1; i < task.type.length; i++){
+        types += `<div class="task-pair">
+        <div class="task-type-name">${appStorage.typeList[i].title}</div>
+        <div class="task-type-color" style="background-color: ${appStorage.typeList[i].hexVal};"></div>
+    </div>`
+    }
     document.getElementById("view-task-title").innerHTML = task.title;
     document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
     document.getElementById("view-task-priority").innerHTML = task.priority;
     document.getElementById("view-task-sp").innerHTML = task.storyPoint;
-    document.getElementById("view-task-type").innerHTML = task.type.name;
+    document.getElementById("view-task-type").innerHTML = task.type ? types : "";
     document.getElementById("view-task-description").innerHTML = task.description;
 
     document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
