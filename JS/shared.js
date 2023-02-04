@@ -25,6 +25,12 @@ class Storage {
     
     // Methods
     fromData(listObj) {
+        for(let i in listObj._typeList){
+            let type = new Type();
+            type.fromData(listObj._typeList[i]);
+            this._typeList.push(type);
+        }
+
         for (let i in listObj._memberList) {
             let member = new Member();
             member.fromData(listObj._memberList[i]);
@@ -59,12 +65,6 @@ class Storage {
             if (window.location.href.includes("sprintList.html")){
                 addSprintCard(sprint, i);
             }
-        }
-
-        for(let i in listObj._typeList){
-            let type = new Type();
-            type.fromData(listObj._typeList[i]);
-            this.typeList.push(type);
         }
 
         this._memberLoggedIn = listObj._memberLoggedIn;

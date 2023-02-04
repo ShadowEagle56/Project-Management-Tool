@@ -187,7 +187,7 @@ function openAddTaskPopup() {
         var el = document.createElement("option");
         el.setAttribute("id", opt.title)
         el.textContent = opt.title;
-        el.value = opt.hexVal;
+        el.value = i;
         document.getElementById("add-task-type").appendChild(el);
     }
 }
@@ -230,6 +230,11 @@ function addTaskCard(task, id) {
         spColor = high;
     }
 
+    let types = ``
+    for (let i = 0; i < task.type.length; i++) {
+        types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[task.type[i]].hexVal}"></div>`
+    }
+
     let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
     let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
     let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
@@ -238,6 +243,7 @@ function addTaskCard(task, id) {
                     <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
                     <div class="task-card-content">
                         <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
+                        <div class="task-type-container">${types}</div>
                         <div class="task-member-container">${shortenMember}</div>
                     </div>
                 </div>`
