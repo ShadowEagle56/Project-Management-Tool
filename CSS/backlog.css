@@ -64,14 +64,6 @@
     font-weight: bold;
 }
 
-.story-point {
-    align-self: flex-start;
-    border: 0.5px solid black;
-    max-width: 50px;
-    text-align: center;
-    padding: 2px;
-}
-
 /* User Story Card */
 .us-card {
     border-radius: .25rem;
@@ -91,42 +83,6 @@
 
 .us-card-content {
     padding: 10px 10px 20px 10px;
-}
-
-/* Task Card */
-.task-card {
-    border-radius: .25rem;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
-}
-
-.task-card:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-}
-
-.task-card-header {
-    text-align: center;
-    line-height: 40px;
-    font-weight: bold;
-}
-
-.task-card-content {
-    padding: 10px 10px 20px 10px;
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    align-items: flex-end;
-    column-gap: 10px;
-}
-
-.task-member-container {
-    grid-column: 2;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    text-align: center;
-    border: 0.5px solid black;
-    font-weight: bold;
 }
 
 @media screen and (max-width: 900px) {
@@ -404,20 +360,4 @@
     border: 1px solid black;
     width: 15px;
     height: 15px;
-}
-
-#overlay {
-    position: fixed;
-    opacity: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-}
-
-#overlay.active {
-    opacity: 1;
-    pointer-events: all;
 }
