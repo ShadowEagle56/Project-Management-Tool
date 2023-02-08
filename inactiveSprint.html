@@ -17,7 +17,7 @@
 
         <div class="inactive-main">
             <div class="inactive-edit">
-                <button>Update Tasks</button>
+                <button onclick="openUpdateTasks()">Update Tasks</button>
                 <button>Edit Sprint Details</button>
             </div>
 
@@ -32,6 +32,7 @@
             <div class="inactive-tasks">
                 <div class="container-header" id="sprint-container-title"></div>
                 <div class="inactive-tasks-container">
+                    <!-- Placeholder for testing purposes -->
                     <div class="task-card" id="task-1">
                         <div class="task-card-header" style="background-color: lightblue;">Test</div>
                         <div class="task-card-content">
@@ -43,6 +44,39 @@
             </div>
         </div>
     </body>
+
+    <div id="overlay"></div>
+
+    <!-- Update Tasks Popup -->
+    <div class="update-tasks-popup" id="update-tasks-popup">
+        <div class="update-tasks-popup-header">
+            <div class="title">Update Tasks</div>
+            <div class="close-button">
+                <button onclick="closeUpdateTasks();">&times;</button>
+            </div>
+        </div>
+        <div class="update-tasks-popup-body">
+            <div class="update-tasks-title">Add task: </div>
+            <div class="update-tasks-input">
+                <select name="add-task" id="add-task" multiple>
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+            <div class="update-tasks-title">Remove task: </div>
+            <div class="update-tasks-input">
+                <select name="add-task" id="add-task" multiple>
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+
+            <div class="update-tasks-submit">
+                <button>Update</button>
+            </div>
+
+        </div>
+        
+
+    </div>
 
     <script src="JS/shared.js"></script>
     <script src="JS/inactiveSprint.js"></script>
