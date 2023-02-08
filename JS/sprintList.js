@@ -28,10 +28,12 @@ function addSprint() {
     let startDate = document.getElementById("add-sprint-start-date").value;
     let endDate = document.getElementById("add-sprint-end-date").value;
 
+    let index = appStorage.sprintList.length - 1;
+
     let sprint = new Sprint(title, startDate, endDate)
     appStorage.sprintList.push(sprint)
     updateLocalStorage(APP_DATA_KEY, appStorage);
-    addSprintCard(sprint, title);
+    addSprintCard(sprint, index);
     closeAddSprintPopup();
     clearAddSprintData();
 }
@@ -43,10 +45,10 @@ function deleteSprint(sprintTitle){
     window.location.reload();
 }
 
-function addSprintCard(sprint, title) {
+function addSprintCard(sprint, i) {
     let sprintContainer = document.getElementById("sprint-container");
     // button is in the middle
-    let card = `<div class="sprint-card" id="sprint-card-${title}">
+    let card = `<div class="sprint-card" id="sprint-card-${i}" onclick="openSprintPage(${i})">
                     <div class="card-title">${sprint.title}</div>
                     <div class="card-date">${sprint.startDate} - ${sprint.endDate}</div>
                     <div class="card-status">${sprint.status}</div>
@@ -64,6 +66,19 @@ function clearAddSprintData() {
     document.getElementById("add-sprint-end-date").value = "";
 }
 
+function openSprintPage(i) {
+    appStorage.currentSprint = i;
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+
+    let status = appStorage.sprintList[appStorage.currentSprint].status
+
+    if (status === "Inactive") {
+        window.location.replace("inactiveSprint.html");
+    } else {
+        window.location.replace("activeSprint.html")
+    }
+}
+
 let appStorage = new Storage();
 
 if (localStorageChecker(APP_DATA_KEY) == true) {
@@ -71,3 +86,5 @@ if (localStorageChecker(APP_DATA_KEY) == true) {
 } else {
     updateLocalStorage(APP_DATA_KEY, appStorage);
 };
+
+console.log(appStorage)

@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="CSS/shared.css">
         <link rel="stylesheet" href="CSS/inactiveSprint.css">
     </head>
-    <body>
+    <body onload="loadData()">
         <div class="header">
             <a href="login.html" class="logo">PMT</a>
             <div class="header-right">
@@ -20,15 +20,17 @@
                 <button>Update Tasks</button>
                 <button>Edit Sprint Details</button>
             </div>
+
             <div class="inactive-info-start">
-                <div class="inactive-date">2023-01-23 - 2023-02-20</div>
-                <div class="inactive-status">Inactive</div>
+                <div class="inactive-date" id="inactive-date"></div>
+                <div class="inactive-status" id="inactive-status"></div>
                 <div>
                     <button>Start Sprint</button>
                 </div>
             </div>
+
             <div class="inactive-tasks">
-                <div class="container-header">Sprint Name</div>
+                <div class="container-header" id="sprint-container-title"></div>
                 <div class="inactive-tasks-container">
                     <div class="task-card" id="task-1">
                         <div class="task-card-header" style="background-color: lightblue;">Test</div>
@@ -41,4 +43,7 @@
             </div>
         </div>
     </body>
+
+    <script src="JS/shared.js"></script>
+    <script src="JS/inactiveSprint.js"></script>
 </html>
