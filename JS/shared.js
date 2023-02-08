@@ -134,7 +134,7 @@ class Member {
     };
 };
 
-// Task class that stores all relevant informationn regarding a task
+// Task class that stores all relevant information regarding a task
 class Task {
     constructor (title, p){
         this._title = title;
@@ -143,7 +143,8 @@ class Task {
         this._priority = p;
         this._storyPoint = 0;
         this._labels = [];
-        this._type;
+        // type is a single type instead of an array of types
+        this._type = [];
         this._startDate;
         this._endDate;
         this._index;

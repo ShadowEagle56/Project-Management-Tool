@@ -231,9 +231,9 @@ function addTaskCard(task, id) {
     }
 
     let types = ``
-    for (let i = 0; i < task.type.length; i++) {
-        types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[task.type[i]].hexVal}"></div>`
-    }
+    task.type.forEach(
+        typeIndex => 
+            types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
 
     let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
     let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
@@ -256,15 +256,15 @@ function addTask() {
     let member = document.getElementById("add-task-member").value;
     let priority = document.getElementById("add-task-priority").value;
     let sp = document.getElementById("add-task-sp").value;
-    let type = document.getElementById("add-task-type").value;
+    let types = document.getElementById("add-task-type").selectedOptions;  // of type HTMLCollection
     let description = document.getElementById("add-task-description").value;
 
     let task = new Task(title, priority);
     if (member) {
         task.member = appStorage.memberList[member];
     }
-    if (type) {
-        task.type = type;
+    if (types) {
+        task.type = Array.from(types).map(({value}) => value);  // convert to array of indices
     }
     if (description) {
         task.description = description;
@@ -272,7 +272,6 @@ function addTask() {
     if (sp) {
         task.storyPoint = sp;
     }
-
     appStorage.taskList.push(task);
     updateLocalStorage(APP_DATA_KEY, appStorage);
     addTaskCard(task, appStorage.taskList.length - 1);
@@ -283,16 +282,12 @@ function addTask() {
 // View Task Details
 function openViewTaskPopup(id) {
     let task = appStorage.taskList[id];
-    let types = task.type ? `<div class="task-pair">
-    <div class="task-type-name">${appStorage.typeList[0].title}</div>
-    <div class="task-type-color" style="background-color: ${appStorage.typeList[0].hexVal};"></div>
-</div>` : "";
-    for (let i = 1; i < task.type.length; i++){
-        types += `<div class="task-pair">
-        <div class="task-type-name">${appStorage.typeList[i].title}</div>
-        <div class="task-type-color" style="background-color: ${appStorage.typeList[i].hexVal};"></div>
-    </div>`
-    }
+    let types = "";
+    task.type.forEach(typeIndex => types += `<div class="task-pair">
+    <div class="task-type-name">${appStorage.typeList[typeIndex].title}</div>
+    <div class="task-type-color" style="background-color: ${appStorage.typeList[typeIndex].hexVal};"></div>
+    </div>`)
+
     document.getElementById("view-task-title").innerHTML = task.title;
     document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
     document.getElementById("view-task-priority").innerHTML = task.priority;
@@ -307,6 +302,8 @@ function openViewTaskPopup(id) {
     viewTaskPopup.classList.add("active");
     overlay.classList.add("active");
 }
+
+// Edit task
 
 function closeViewTaskPopup() {
     viewTaskPopup.classList.remove("active");
@@ -330,6 +327,15 @@ function editTask(id) {
         }
     }
 
+    for(var i = 0; i < appStorage.typeList.length; i++){
+        var opt = appStorage.typeList[i];
+        var el = document.createElement("option");
+        el.setAttribute("id", opt.title)
+        el.textContent = opt.title;
+        el.value = i;
+        document.getElementById("edit-task-type").appendChild(el);
+    }
+
     document.getElementById("edit-task-title").value = appStorage.taskList[id].title;
     document.getElementById("edit-task-member").value = index;
     document.getElementById("edit-task-priority").value = appStorage.taskList[id].priority;
@@ -348,14 +354,14 @@ function editTaskApply(id) {
     let member = document.getElementById("edit-task-member").value;
     let priority = document.getElementById("edit-task-priority").value;
     let sp = document.getElementById("edit-task-sp").value;
-    let type = document.getElementById("edit-task-type").value;
+    let types = document.getElementById("edit-task-type").selectedOptions;
     let desc = document.getElementById("edit-task-description").value
 
     appStorage.taskList[id].title = title;
     appStorage.taskList[id].member = appStorage.memberList[member];
     appStorage.taskList[id].priority = priority;
     appStorage.taskList[id].sp = sp;
-    appStorage.taskList[id].type = type;
+    appStorage.taskList[id].type = Array.from(types).map(({value}) => value);
     appStorage.taskList[id].description = desc;
     updateLocalStorage(APP_DATA_KEY, appStorage);
     window.location.reload();
