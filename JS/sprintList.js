@@ -2,13 +2,6 @@
 
 const APP_DATA_KEY = "ScrumPMTData";
 
-// Goes to the profile of the current logged in user
-function userProfile() {
-    appStorage.selectedMember = appStorage.memberLoggedIn._memberId;
-    updateLocalStorage(APP_DATA_KEY, appStorage);
-    window.location.replace('member.html')
-}
-
 const addSprintPopup = document.getElementById("add-sprint-popup");
 const delSprintPopup = document.getElementById("delete-sprint-popup");
 const overlay = document.getElementById("overlay");
@@ -36,6 +29,7 @@ function addSprint() {
     addSprintCard(sprint, index);
     closeAddSprintPopup();
     clearAddSprintData();
+    window.location.reload();
 }
 
 function deleteSprint(sprintTitle){

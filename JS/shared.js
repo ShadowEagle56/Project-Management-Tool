@@ -303,6 +303,13 @@ class Type{
     }
 }
 
+// Goes to the profile of the current logged in user
+function userProfile() {
+    appStorage.selectedMember = appStorage.memberLoggedIn._memberId;
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.replace('member.html')
+}
+
 // Upload data with the key into local storage
 function updateLocalStorage(key, data) {
     let dataString = JSON.stringify(data);  // Convert object into string

@@ -2,13 +2,6 @@
 
 const APP_DATA_KEY = "ScrumPMTData";
 
-// Goes to the profile of the current logged in user
-function userProfile() {
-    appStorage.selectedMember = appStorage.memberLoggedIn._memberId;
-    updateLocalStorage(APP_DATA_KEY, appStorage);
-    window.location.replace('member.html')
-}
-
 const overlay = document.getElementById("overlay");
 const addMemberPopup = document.getElementById("add-member-popup")
 
