@@ -28,6 +28,12 @@ class Storage {
     
     // Methods
     fromData(listObj) {
+        for(let i in listObj._typeList){
+            let type = new Type();
+            type.fromData(listObj._typeList[i]);
+            this._typeList.push(type);
+        }
+
         for (let i in listObj._memberList) {
             let member = new Member();
             member.fromData(listObj._memberList[i]);
@@ -132,7 +138,7 @@ class Member {
     };
 };
 
-// Task class that stores all relevant informationn regarding a task
+// Task class that stores all relevant information regarding a task
 class Task {
     constructor (title, p){
         this._title = title;
@@ -141,7 +147,8 @@ class Task {
         this._priority = p;
         this._storyPoint = 0;
         this._labels = [];
-        this._type;
+        // type is a single type instead of an array of types
+        this._type = [];
         this._startDate;
         this._endDate;
         this._index;
@@ -274,6 +281,25 @@ class Sprint {
         this._startDate = sprintObj._startDate;
         this._endDate = sprintObj._endDate;
         this._status = sprintObj._status;
+    }
+}
+
+// Type class
+class Type{
+    constructor(title, hexVal){
+        this._title = title;
+        this._hexVal = hexVal;
+    }
+
+    get title() { return this._title };
+    get hexVal() { return this._hexVal };
+
+    set title(newTitle) { this._title = newTitle };
+    set hexVal(newHex) { this._hexVal = newHex };
+
+    fromData(typeObj){
+        this._title = typeObj._title;
+        this._hexVal = typeObj._hexVal;
     }
 }
 

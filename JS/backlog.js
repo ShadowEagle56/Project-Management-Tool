@@ -19,12 +19,20 @@ function loadData() {
         editTaskMember.insertAdjacentHTML('beforeend', opt);
     }
 
-    let typeDropdown = document.getElementById("add-task-type");
+    // let typeDropdown = document.getElementById("add-task-type");
+    let typeLegend = document.getElementById("legend-type");
     for (let i = 0; i < appStorage.typeList.length; i++) {
-        let name = appStorage.memberList[i].firstName + " " + appStorage.memberList[i].lastName;
-        let opt = `<option value="${i}">${name}</option>`
-        typeDropdown.insertAdjacentHTML('beforeend', opt)
+        // let name = appStorage.typeList[i].title;
+        // let opt = `<option value="${i}">${name}</option>`
+        // typeDropdown.insertAdjacentHTML('beforeend', opt)
+
+        let legend = `<div class="legend-pair">
+                        <div class="legend-name">${appStorage.typeList[i].title}</div>
+                        <div class="legend-color" style="background-color: ${appStorage.typeList[i].hexVal};"></div>
+                    </div>`
+        typeLegend.insertAdjacentHTML('beforeend', legend)
     }
+
 }
 
 ////////////////////////////////// User Story //////////////////////////////////
@@ -173,11 +181,25 @@ let selectingUS = false;
 function openAddTaskPopup() {
     addTaskPopup.classList.add("active");
     overlay.classList.add("active");
+    // populate drop down
+    for(var i = 0; i < appStorage.typeList.length; i++){
+        var opt = appStorage.typeList[i];
+        var el = document.createElement("option");
+        el.setAttribute("id", opt.title)
+        el.textContent = opt.title;
+        el.value = i;
+        document.getElementById("add-task-type").appendChild(el);
+    }
 }
 
 function closeAddTaskPopup() {
     addTaskPopup.classList.remove("active");
     overlay.classList.remove("active");
+    // remove all types from the drop down
+    for(var i = 0; i < appStorage.typeList.length; i++){
+        var el = document.getElementById(appStorage.typeList[i].title);
+        document.getElementById("add-task-type").removeChild(el);
+    }
 }
 
 function clearAddTaskData() {
@@ -208,6 +230,11 @@ function addTaskCard(task, id) {
         spColor = high;
     }
 
+    let types = ``
+    task.type.forEach(
+        typeIndex => 
+            types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
+
     let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
     let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
     let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
@@ -216,6 +243,7 @@ function addTaskCard(task, id) {
                     <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
                     <div class="task-card-content">
                         <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
+                        <div class="task-type-container">${types}</div>
                         <div class="task-member-container">${shortenMember}</div>
                     </div>
                 </div>`
@@ -228,15 +256,15 @@ function addTask() {
     let member = document.getElementById("add-task-member").value;
     let priority = document.getElementById("add-task-priority").value;
     let sp = document.getElementById("add-task-sp").value;
-    let type = document.getElementById("add-task-type").value;
+    let types = document.getElementById("add-task-type").selectedOptions;  // of type HTMLCollection
     let description = document.getElementById("add-task-description").value;
 
     let task = new Task(title, priority);
     if (member) {
         task.member = appStorage.memberList[member];
     }
-    if (type) {
-        task.type = type;
+    if (types) {
+        task.type = Array.from(types).map(({value}) => value);  // convert to array of indices
     }
     if (description) {
         task.description = description;
@@ -244,7 +272,6 @@ function addTask() {
     if (sp) {
         task.storyPoint = sp;
     }
-
     appStorage.taskList.push(task);
     updateLocalStorage(APP_DATA_KEY, appStorage);
     addTaskCard(task, appStorage.taskList.length - 1);
@@ -255,11 +282,17 @@ function addTask() {
 // View Task Details
 function openViewTaskPopup(id) {
     let task = appStorage.taskList[id];
+    let types = "";
+    task.type.forEach(typeIndex => types += `<div class="task-pair">
+    <div class="task-type-name">${appStorage.typeList[typeIndex].title}</div>
+    <div class="task-type-color" style="background-color: ${appStorage.typeList[typeIndex].hexVal};"></div>
+    </div>`)
+
     document.getElementById("view-task-title").innerHTML = task.title;
     document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
     document.getElementById("view-task-priority").innerHTML = task.priority;
     document.getElementById("view-task-sp").innerHTML = task.storyPoint;
-    // document.getElementById("view-task-type").innerHTML = task.type;
+    document.getElementById("view-task-type").innerHTML = task.type ? types : "";
     document.getElementById("view-task-description").innerHTML = task.description;
 
     document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
@@ -269,6 +302,8 @@ function openViewTaskPopup(id) {
     viewTaskPopup.classList.add("active");
     overlay.classList.add("active");
 }
+
+// Edit task
 
 function closeViewTaskPopup() {
     viewTaskPopup.classList.remove("active");
@@ -292,12 +327,20 @@ function editTask(id) {
         }
     }
 
+    for(var i = 0; i < appStorage.typeList.length; i++){
+        var opt = appStorage.typeList[i];
+        var el = document.createElement("option");
+        el.setAttribute("id", opt.title)
+        el.textContent = opt.title;
+        el.value = i;
+        document.getElementById("edit-task-type").appendChild(el);
+    }
+
     document.getElementById("edit-task-title").value = appStorage.taskList[id].title;
-    // To be added
     document.getElementById("edit-task-member").value = index;
     document.getElementById("edit-task-priority").value = appStorage.taskList[id].priority;
     document.getElementById("edit-task-sp").value = appStorage.taskList[id].storyPoint;
-    // document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
+    document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
     document.getElementById("edit-task-description").value = appStorage.taskList[id].description;
 
     document.getElementById("edit-task-submit").innerHTML = `<button>Assign to User Story</button>
@@ -311,14 +354,14 @@ function editTaskApply(id) {
     let member = document.getElementById("edit-task-member").value;
     let priority = document.getElementById("edit-task-priority").value;
     let sp = document.getElementById("edit-task-sp").value;
-    let type = document.getElementById("edit-task-type").value;
+    let types = document.getElementById("edit-task-type").selectedOptions;
     let desc = document.getElementById("edit-task-description").value
 
     appStorage.taskList[id].title = title;
     appStorage.taskList[id].member = appStorage.memberList[member];
     appStorage.taskList[id].priority = priority;
     appStorage.taskList[id].sp = sp;
-    appStorage.taskList[id].type = type;
+    appStorage.taskList[id].type = Array.from(types).map(({value}) => value);
     appStorage.taskList[id].description = desc;
     updateLocalStorage(APP_DATA_KEY, appStorage);
     window.location.reload();
@@ -354,6 +397,22 @@ function openAddTypePopup() {
 function closeAddTypePopup() {
     addTypePopup.classList.remove("active");
     overlay.classList.remove("active");
+}
+
+function clearAddTypeData(){
+    document.getElementById("add-type-title").value = "";
+    document.getElementById("type-colour").value = "#000000";
+}
+
+function addType(){
+    let title = document.getElementById("add-type-title").value;
+    let hexVal = document.getElementById("type-colour").value;
+
+    appStorage.typeList.push(new Type(title, hexVal));
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    clearAddTypeData();
+    closeAddTypePopup();
+    window.location.reload();
 }
 
 // View Legend Popup

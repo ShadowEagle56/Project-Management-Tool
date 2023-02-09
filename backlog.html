@@ -229,7 +229,7 @@
             <div class="task-details" id="view-task-sp"></div>
 
             <div class="task-title">Type:</div>
-            <div class="task-details" id="view-task-type"></div>
+            <div class="task-type-details" id="view-task-type"></div>
 
             <div class="task-title">Description:</div>
             <div class="task-details" id="view-task-description"></div>
@@ -279,7 +279,7 @@
 
             <div class="task-title">Type:</div>
             <div class="task-input">
-                <select name="type-list" id="edit-task-type">
+                <select name="type-list" id="edit-task-type" multiple>
                     <option value="">Select an option</option>
                 </select>
             </div>
@@ -341,17 +341,9 @@
                 <input type="text" placeholder="Title..." id="add-type-title" class="input-text">
             </div>
             <div class="type-title">Type Colour:</div>
-                <div class="type-colour-preview"></div>
-                <div class="type-colour-input">
-                    <input type="number" id="type-colour-red-value" min="0" max="255" value="0">
-
-                </div>
-                <div class="type-colour-input">
-                    <input type="number" id="type-colour-green-value" min="0" max="255" value="0">
-                </div>
-                <div class="type-colour-input">
-                    <input type="number" id="label-colour-blue-value" min="0" max="255" value="0">
-                </div>
+            <div class="type-input">
+                <input type="color" id="type-colour" name="type-colour" value="#000000" class="type-colour-preview">
+            </div>
         </div>
 
         <div class="add-type-submit">
