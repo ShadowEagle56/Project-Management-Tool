@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="CSS/shared.css">
+        <link rel="stylesheet" href="CSS/inactiveSprint.css">
+    </head>
+    <body onload="loadData()">
+        <div class="header">
+            <a href="login.html" class="logo">PMT</a>
+            <div class="header-right">
+                <a href="backlog.html">Product Backlog</a>
+                <a href="sprintList.html">Sprint List</a>
+                <a href="memberList.html">Member List</a>
+                <img src="Assets/profile.png" class="member-profile" onclick="userProfile()">
+            </div>
+        </div>
+
+        <div class="inactive-main">
+            <div class="inactive-edit">
+                <button onclick="openUpdateTasks()">Update Tasks</button>
+                <button>Edit Sprint Details</button>
+            </div>
+
+            <div class="inactive-info-start">
+                <div class="inactive-date" id="inactive-date"></div>
+                <div class="inactive-status" id="inactive-status"></div>
+                <div>
+                    <button>Start Sprint</button>
+                </div>
+            </div>
+
+            <div class="inactive-tasks">
+                <div class="container-header" id="sprint-container-title"></div>
+                <div class="inactive-tasks-container">
+                    <!-- Placeholder for testing purposes -->
+                    <div class="task-card" id="task-1">
+                        <div class="task-card-header" style="background-color: lightblue;">Test</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: lightblue;">SP 1</div>
+                            <div class="task-member-container">N/A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <div id="overlay"></div>
+
+    <!-- Update Tasks Popup -->
+    <div class="update-tasks-popup" id="update-tasks-popup">
+        <div class="update-tasks-popup-header">
+            <div class="title">Update Tasks</div>
+            <div class="close-button">
+                <button onclick="closeUpdateTasks();">&times;</button>
+            </div>
+        </div>
+        <div class="update-tasks-popup-body">
+            <div class="update-tasks-title">Add task: </div>
+            <div class="update-tasks-input">
+                <select name="add-task" id="add-task" multiple>
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+            <div class="update-tasks-title">Remove task: </div>
+            <div class="update-tasks-input">
+                <select name="add-task" id="add-task" multiple>
+                    <option value="">Select an option</option>
+                </select>
+            </div>
+
+            <div class="update-tasks-submit">
+                <button>Update</button>
+            </div>
+
+        </div>
+        
+
+    </div>
+
+    <script src="JS/shared.js"></script>
+    <script src="JS/inactiveSprint.js"></script>
+</html>

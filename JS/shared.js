@@ -8,6 +8,7 @@ class Storage {
         this._usList = [];
         this._sprintList = [];
         this._typeList = [];
+        this._currentSprint = 0;
     };
 
     // Getters
@@ -18,10 +19,12 @@ class Storage {
     get usList() { return this._usList; };
     get sprintList() { return this._sprintList; };
     get typeList() { return this._typeList; };
+    get currentSprint() { return this._currentSprint; };
 
     // Setters
     set memberLoggedIn(member) { this._memberLoggedIn = member; };
     set selectedMember(newNum) { this._selectedMember = newNum; };
+    set currentSprint(newSprint) { this._currentSprint = newSprint; };
     
     // Methods
     fromData(listObj) {
@@ -69,6 +72,7 @@ class Storage {
 
         this._memberLoggedIn = listObj._memberLoggedIn;
         this._selectedMember = listObj._selectedMember;
+        this._currentSprint = listObj._currentSprint;
     };
 
     removeItem(data, key){

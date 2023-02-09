@@ -1,0 +1,103 @@
+/* Main */
+.inactive-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 30fr;
+    margin: 40px 10px 0px 10px;
+}
+
+.inactive-info-start {
+    grid-column: 2;
+    display: flex;
+    column-gap: 10px;
+    justify-content: right;
+}
+
+.inactive-date {
+    border: 1px solid black;
+    text-align: center;
+    width: 200px;
+}
+
+.inactive-status {
+    border: 1px solid black;
+    text-align: center;
+    width: 100px;
+}
+
+.inactive-tasks {
+    margin-top: 20px;
+    grid-column: 1 / 3;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.container-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
+.inactive-tasks-container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 15px;
+    column-gap: 15px;
+    max-height: 80%;
+    overflow: scroll;
+}
+
+/* Update Tasks Popup */
+.update-tasks-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr;
+    padding: 20px;
+    width: 20%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.update-tasks-popup-header {
+    display: grid;
+    grid-template-columns: 30fr 1fr;
+    font-weight: bold;
+    text-align: center;
+    font-size: larger;
+}
+
+.close-button {
+    float: right;
+}
+
+.update-tasks-popup-body {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.update-tasks-title {
+    grid-column: 1;
+}
+
+.update-tasks-submit {
+    grid-column: 1 / 3;
+    padding-top: 20px;
+    justify-self: center;
+}
+
+.update-tasks-popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}
