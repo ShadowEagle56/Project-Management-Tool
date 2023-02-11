@@ -3,6 +3,17 @@
 const APP_DATA_KEY = "ScrumPMTData";
 
 function loadData() {
+    // User Story
+    let addTaskUS = document.getElementById("add-task-us");
+    let editTaskUS = document.getElementById("edit-task-us");
+    for (let i = 0; i < appStorage.usList.length; i++) {
+        let usTitle = appStorage.usList[i].title.slice(0, 20);
+        let opt = `<option value="${i}">${usTitle}</option>`
+        addTaskUS.insertAdjacentHTML('beforeend', opt);
+        editTaskUS.insertAdjacentHTML('beforeend', opt);
+    }
+
+    // Members
     let addTaskMember = document.getElementById("add-task-member");
     let editTaskMember = document.getElementById("edit-task-member");
     for (let i = 0; i < appStorage.memberList.length; i++) {
@@ -12,13 +23,9 @@ function loadData() {
         editTaskMember.insertAdjacentHTML('beforeend', opt);
     }
 
-    // let typeDropdown = document.getElementById("add-task-type");
+    // Types
     let typeLegend = document.getElementById("legend-type");
     for (let i = 0; i < appStorage.typeList.length; i++) {
-        // let name = appStorage.typeList[i].title;
-        // let opt = `<option value="${i}">${name}</option>`
-        // typeDropdown.insertAdjacentHTML('beforeend', opt)
-
         let legend = `<div class="legend-pair">
                         <div class="legend-name">${appStorage.typeList[i].title}</div>
                         <div class="legend-color" style="background-color: ${appStorage.typeList[i].hexVal};"></div>
@@ -67,6 +74,7 @@ function addUS() {
     addUSCard(us, appStorage.usList.length - 1);
     clearAddUSData();
     closeAddUSPopup();
+    window.location.reload();
 }
 
 // Clear input data
@@ -250,6 +258,7 @@ function addTask() {
     let priority = document.getElementById("add-task-priority").value;
     let sp = document.getElementById("add-task-sp").value;
     let types = document.getElementById("add-task-type").selectedOptions;  // of type HTMLCollection
+    let us = document.getElementById("add-task-us").value;
     let description = document.getElementById("add-task-description").value;
 
     let task = new Task(title, priority);
@@ -265,6 +274,11 @@ function addTask() {
     if (sp) {
         task.storyPoint = sp;
     }
+
+    if (us) {
+        task.userStory = us;
+    }
+
     appStorage.taskList.push(task);
     updateLocalStorage(APP_DATA_KEY, appStorage);
     addTaskCard(task, appStorage.taskList.length - 1);
@@ -286,6 +300,7 @@ function openViewTaskPopup(id) {
     document.getElementById("view-task-priority").innerHTML = task.priority;
     document.getElementById("view-task-sp").innerHTML = task.storyPoint;
     document.getElementById("view-task-type").innerHTML = task.type ? types : "";
+    document.getElementById("view-task-us").innerHTML = task.userStory ? appStorage.usList[task.userStory].title.slice(0, 20) : "";
     document.getElementById("view-task-description").innerHTML = task.description;
 
     document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
