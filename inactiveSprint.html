@@ -31,16 +31,7 @@
 
             <div class="inactive-tasks">
                 <div class="container-header" id="sprint-container-title"></div>
-                <div class="inactive-tasks-container">
-                    <!-- Placeholder for testing purposes -->
-                    <div class="task-card" id="task-1">
-                        <div class="task-card-header" style="background-color: lightblue;">Test</div>
-                        <div class="task-card-content">
-                            <div class="story-point" style="background-color: lightblue;">SP 1</div>
-                            <div class="task-member-container">N/A</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="inactive-tasks-container" id="inactive-tasks-container"></div>
             </div>
         </div>
     </body>
@@ -64,13 +55,13 @@
             </div>
             <div class="update-tasks-title">Remove task: </div>
             <div class="update-tasks-input">
-                <select name="add-task" id="add-task" multiple>
+                <select name="remove-task" id="remove-task" multiple>
                     <option value="">Select an option</option>
                 </select>
             </div>
 
             <div class="update-tasks-submit">
-                <button>Update</button>
+                <button onclick="addRemoveTask()">Update</button>
             </div>
         </div>
     </div>

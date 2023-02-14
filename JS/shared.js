@@ -157,6 +157,7 @@ class Task {
         this._timeSpent;
         this._totalHour = 0;
         this._userStory;
+        this._inSprint = false;
     };
 
     // Getters
@@ -175,6 +176,7 @@ class Task {
     get timeSpent() { return this._timeSpent; };
     get totalHour() { return this._totalHour; };
     get userStory() { return this._userStory; };
+    get inSprint() { return this._inSprint; };
 
     // Setters
     set title(newTitle) { this._title = newTitle; };
@@ -190,6 +192,7 @@ class Task {
     set status(newStatus) { this._status = newStatus; };
     set sprint(newSprint) { this._sprint = newSprint; };
     set userStory(newUS) { this._userStory = newUS; };
+    set inSprint(newStatus) { this._inSprint = newStatus; };
 
     // Methods
     addRecord(date, hour, minute) {
@@ -216,6 +219,7 @@ class Task {
         this._sprint = taskObj._sprint;
         this._timeSpent = taskObj._timeSpent;
         this._userStory = taskObj._userStory;
+        this._inSprint = taskObj._inSprint;
     };
 };
 
@@ -261,6 +265,7 @@ class Sprint {
         this._startDate = startDate;
         this._endDate = endDate;
         this._status = "Inactive";
+        this._taskList = [];
     }
 
     // Getters
@@ -268,12 +273,14 @@ class Sprint {
     get startDate() { return this._startDate; };
     get endDate() { return this._endDate; };
     get status() { return this._status; };
+    get taskList() { return this._taskList; };
 
     // Setters
     set title(newTitle) { this._title = newTitle; };
     set startDate(newDate) { this._startDate = newDate; };
     set endDate(newDate) { this._endDate = newDate; };
     set status(newStatus) { this._status = newStatus; };
+    set taskList(newTasks) { this._taskList = newTasks; };
 
     // Methods
     fromData(sprintObj) {
@@ -281,6 +288,7 @@ class Sprint {
         this._startDate = sprintObj._startDate;
         this._endDate = sprintObj._endDate;
         this._status = sprintObj._status;
+        this._taskList = sprintObj._taskList;
     }
 }
 
