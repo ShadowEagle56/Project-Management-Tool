@@ -18,14 +18,14 @@
         <div class="inactive-main">
             <div class="inactive-edit">
                 <button onclick="openUpdateTasks()">Update Tasks</button>
-                <button>Edit Sprint Details</button>
+                <button onclick="openSprintSettings()">Sprint Settings</button>
             </div>
 
             <div class="inactive-info-start">
                 <div class="inactive-date" id="inactive-date"></div>
                 <div class="inactive-status" id="inactive-status"></div>
                 <div>
-                    <button>Start Sprint</button>
+                    <button onclick="confirmationStart()">Start Sprint</button>
                 </div>
             </div>
 
@@ -72,10 +72,39 @@
             <div class="update-tasks-submit">
                 <button>Update</button>
             </div>
-
         </div>
-        
+    </div>
 
+    <!-- Sprint Settings Popup -->
+    <div class="sprint-settings-popup" id="sprint-settings-popup">
+        <div class="sprint-settings-popup-header">
+            <div class="popup-title">Sprint Settings</div>
+            <div>
+                <button class="close-button" onclick="closeSprintSettings()">&times;</button>
+            </div>
+        </div>
+
+        <div class="sprint-settings-popup-body">
+            <div class="sprint-title">Title:</div>
+            <div class="sprint-input">
+                <input type="text" placeholder="Title" id="sprint-settings-title" class="input-text">
+            </div>
+
+            <div class="sprint-title">Start Date:</div>
+            <div class="sprint-input">
+                <input type="date" id="sprint-settings-start-date">
+            </div>
+
+            <div class="sprint-title">End Date</div>
+            <div class="sprint-input">
+                <input type="date" id="sprint-settings-end-date">
+            </div>
+        </div>
+
+        <div class="sprint-settings-submit">
+            <button>Save Changes</button>
+            <button>Delete Sprint</button>
+        </div>
     </div>
 
     <script src="JS/shared.js"></script>
