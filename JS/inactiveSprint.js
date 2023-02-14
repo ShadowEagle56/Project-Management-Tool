@@ -39,9 +39,9 @@ function loadData() {
     }
 
     // Autofills option to remove existing tasks in current sprint
-    for (let i in appStorage.sprintList[appStorage.currentSprint].taskList) {
-        let name = appStorage.taskList[i].title.slice(0,20);
-        let opt = `<option value="${i}">${name}</option>`;
+    for (let i = 0; i < appStorage.sprintList[appStorage.currentSprint].taskList.length; i++) {
+        let name = appStorage.taskList[appStorage.sprintList[appStorage.currentSprint].taskList[i]].title.slice(0,20);
+        let opt = `<option value="${appStorage.sprintList[appStorage.currentSprint].taskList[i]}">${name}</option>`;
         removeTasks.insertAdjacentHTML('beforeend', opt);
     }
 
@@ -112,7 +112,7 @@ function addRemoveTask() {
             appStorage.sprintList[appStorage.currentSprint]._taskList.push(i);
         }
         appStorage.sprintList[appStorage.currentSprint]._taskList.sort();
-        
+
         for (let i in selectedAdd) {
             appStorage.taskList[i].inSprint = true;
         }
@@ -120,12 +120,13 @@ function addRemoveTask() {
 
     if (remove) {
         let selectedRemove = Array.from(remove).map(({value}) => value);
+        console.log(selectedRemove)
 
-        for (let i in selectedRemove) {
+        for (let i = 0; i < selectedRemove.length; i++) {
             appStorage.sprintList[appStorage.currentSprint].taskList = appStorage.sprintList[appStorage.currentSprint].taskList.filter(function(arr) {
-                return arr != i;
+                return arr != selectedRemove[i];
             })
-            appStorage.taskList[i].inSprint = false;
+            appStorage.taskList[selectedRemove[i]].inSprint = false;
         }
     }
 
