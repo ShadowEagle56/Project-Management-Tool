@@ -108,19 +108,18 @@ function addRemoveTask() {
     if (add) {
         let selectedAdd = Array.from(add).map(({value}) => value);
 
-        for (let i in selectedAdd) {
-            appStorage.sprintList[appStorage.currentSprint]._taskList.push(i);
+        for (let i = 0; i < selectedAdd.length; i++) {
+            appStorage.sprintList[appStorage.currentSprint]._taskList.push(selectedAdd[i]);
         }
         appStorage.sprintList[appStorage.currentSprint]._taskList.sort();
 
-        for (let i in selectedAdd) {
-            appStorage.taskList[i].inSprint = true;
+        for (let i = 0; i < selectedAdd.length; i++) {
+            appStorage.taskList[selectedAdd[i]].inSprint = true;
         }
     }
 
     if (remove) {
         let selectedRemove = Array.from(remove).map(({value}) => value);
-        console.log(selectedRemove)
 
         for (let i = 0; i < selectedRemove.length; i++) {
             appStorage.sprintList[appStorage.currentSprint].taskList = appStorage.sprintList[appStorage.currentSprint].taskList.filter(function(arr) {

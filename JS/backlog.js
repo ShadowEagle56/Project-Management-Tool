@@ -205,7 +205,7 @@ function clearAddTaskData() {
 }
 
 function addTaskCard(task, id) {
-    if (task.inSprint) {
+    if (!task.inSprint) {
         let color = low;
         if (task.priority == "High") {
             color = high;
