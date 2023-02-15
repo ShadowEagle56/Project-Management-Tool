@@ -7,11 +7,6 @@ const dateContainer = document.getElementById("inactive-date");
 const statusContainer = document.getElementById("inactive-status");
 const sprintName = document.getElementById("sprint-container-title");
 const taskContainer = document.getElementById("inactive-tasks-container");
-const overlay = document.getElementById("overlay");
-
-const high = "rgb(240,128,128)";
-const medium = "rgb(255,250,205)";
-const low = "rgb(152,251,152)";
 
 // Update Tasks
 const updateTasksPopup = document.getElementById("update-tasks-popup");
@@ -45,6 +40,7 @@ function loadData() {
         removeTasks.insertAdjacentHTML('beforeend', opt);
     }
 
+    // To be further optimized - Code copied from backlog.js
     if (appStorage.sprintList[appStorage.currentSprint].taskList.length) {
         for (let i = 0; i < appStorage.sprintList[appStorage.currentSprint].taskList.length; i++) {
             let task = appStorage.taskList[appStorage.sprintList[appStorage.currentSprint].taskList[i]];
@@ -76,7 +72,7 @@ function loadData() {
             let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
             let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
 
-            let card = `<div class="task-card" id="task-${i}">
+            let card = `<div class="task-card" id="task-${i}" onclick="openViewTaskPopup(${i})">
                             <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
                             <div class="task-card-content">
                                 <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
@@ -87,6 +83,14 @@ function loadData() {
 
             taskContainer.insertAdjacentHTML('beforeend', card);
         }
+    }
+
+    // Autofills member for edit task popup
+    let editTaskMember = document.getElementById("edit-task-member");
+    for (let i = 0; i < appStorage.memberList.length; i++) {
+        let name = appStorage.memberList[i].firstName + " " + appStorage.memberList[i].lastName;
+        let opt = `<option value="${i}">${name}</option>`
+        editTaskMember.insertAdjacentHTML('beforeend', opt);
     }
 }
 
@@ -105,7 +109,7 @@ function addRemoveTask() {
     let add = addTasks.selectedOptions;
     let remove = removeTasks.selectedOptions;
 
-    if (add) {
+    if (add && !add === "") {
         let selectedAdd = Array.from(add).map(({value}) => value);
 
         for (let i = 0; i < selectedAdd.length; i++) {
@@ -118,7 +122,7 @@ function addRemoveTask() {
         }
     }
 
-    if (remove) {
+    if (remove && !add === "") {
         let selectedRemove = Array.from(remove).map(({value}) => value);
 
         for (let i = 0; i < selectedRemove.length; i++) {
