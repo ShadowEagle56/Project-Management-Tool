@@ -45,10 +45,10 @@
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     row-gap: 15px;
     column-gap: 15px;
-    max-height: 80%;
+    max-height: 500px;
     overflow: scroll;
 }
 
@@ -61,7 +61,7 @@
     border-radius: 10px;
     background-color: white;
     display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 5fr;
     padding: 20px;
     width: 20%;
     transform: translate(-50%, -50%) scale(0);
@@ -100,4 +100,65 @@
 
 .update-tasks-popup.active {
     transform: translate(-50%, -50%) scale(1);
+}
+
+/* Sprint Settings Popup */
+.sprint-settings-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    padding: 20px;
+    width: 30%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.sprint-settings-popup-header {
+    display: grid;
+    grid-template-columns: 30fr 1fr;
+    font-weight: bold;
+    text-align: center;
+    font-size: larger;
+}
+
+.close-button {
+    float: right;
+}
+
+.sprint-settings-popup-body {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.sprint-title {
+    grid-column: 1;
+    /* font-weight: bold; */
+}
+
+.sprint-input {
+    grid-column: 2;
+}
+
+.input-text {
+    width: 100%;
+}
+
+.sprint-settings-popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.sprint-settings-submit {
+    padding-top: 20px;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="CSS/shared.css">
+        <link rel="stylesheet" href="CSS/activeSprint.css">
+    </head>
+    <body onload="loadData()">
+        <div class="header">
+            <a href="login.html" class="logo">PMT</a>
+            <div class="header-right">
+                <a href="backlog.html">Product Backlog</a>
+                <a href="sprintList.html">Sprint List</a>
+                <a href="memberList.html">Member List</a>
+                <img src="Assets/profile.png" class="member-profile" onclick="userProfile()">
+            </div>
+        </div>
+
+        <div class="active-main">
+            <div class="active-title" id="active-title"></div>
+
+            <div class="active-info-end">
+                <div class="active-date" id="active-date"></div>
+                <div class="active-status" id="active-status"></div>
+                <div id="end-sprint">
+                    <button class="end-sprint active" onclick="confirmEnd()">End Sprint</button>
+                </div>
+            </div>
+
+            <div class="active-inactive-tasks">
+                <div class="container-header">Inactive</div>
+                <div class="active-tasks-container">
+                    <!-- Placeholder for testing purposes -->
+                    <div class="task-card" id="task-1">
+                        <div class="task-card-header" style="background-color: lightblue;">Test</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: lightblue;">SP 1</div>
+                            <div class="task-member-container">N/A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="active-inprogress-tasks">
+                <div class="container-header">In Progress</div>
+                <div class="active-tasks-container">
+                    <!-- Placeholder for testing purposes -->
+                    <div class="task-card" id="task-1">
+                        <div class="task-card-header" style="background-color: lightblue;">Test</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: lightblue;">SP 1</div>
+                            <div class="task-member-container">N/A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="active-completed-tasks">
+                <div class="container-header">Completed</div>
+                <div class="active-tasks-container">
+                    <!-- Placeholder for testing purposes -->
+                    <div class="task-card" id="task-1">
+                        <div class="task-card-header" style="background-color: lightblue;">Test</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: lightblue;">SP 1</div>
+                            <div class="task-member-container">N/A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <div id="overlay"></div>
+
+    <script src="JS/shared.js"></script>
+    <script src="JS/activeSprint.js"></script>
+</html>

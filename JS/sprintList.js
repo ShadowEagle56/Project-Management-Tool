@@ -4,7 +4,6 @@ const APP_DATA_KEY = "ScrumPMTData";
 
 const addSprintPopup = document.getElementById("add-sprint-popup");
 const delSprintPopup = document.getElementById("delete-sprint-popup");
-const overlay = document.getElementById("overlay");
 
 function openAddSprintPopup() {
     addSprintPopup.classList.add("active");
@@ -46,10 +45,11 @@ function addSprintCard(sprint, i) {
                     <div class="card-title">${sprint.title}</div>
                     <div class="card-date">${sprint.startDate} - ${sprint.endDate}</div>
                     <div class="card-status">${sprint.status}</div>
-                    <div class="add-sprint-submit">
-                        <button class="close-button" onclick="deleteSprint('${sprint.title}')">Delete Sprint</button>
-                    </div>
                 </div>`
+                //     <div class="add-sprint-submit">
+                //         <button class="close-button" onclick="deleteSprint('${sprint.title}')">Delete Sprint</button>
+                //     </div>
+                // </div>
 
     sprintContainer.insertAdjacentHTML('beforeend', card);
 }

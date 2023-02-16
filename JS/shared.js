@@ -157,6 +157,7 @@ class Task {
         this._timeSpent;
         this._totalHour = 0;
         this._userStory;
+        this._inSprint = false;
     };
 
     // Getters
@@ -175,6 +176,7 @@ class Task {
     get timeSpent() { return this._timeSpent; };
     get totalHour() { return this._totalHour; };
     get userStory() { return this._userStory; };
+    get inSprint() { return this._inSprint; };
 
     // Setters
     set title(newTitle) { this._title = newTitle; };
@@ -190,6 +192,7 @@ class Task {
     set status(newStatus) { this._status = newStatus; };
     set sprint(newSprint) { this._sprint = newSprint; };
     set userStory(newUS) { this._userStory = newUS; };
+    set inSprint(newStatus) { this._inSprint = newStatus; };
 
     // Methods
     addRecord(date, hour, minute) {
@@ -216,6 +219,7 @@ class Task {
         this._sprint = taskObj._sprint;
         this._timeSpent = taskObj._timeSpent;
         this._userStory = taskObj._userStory;
+        this._inSprint = taskObj._inSprint;
     };
 };
 
@@ -261,6 +265,7 @@ class Sprint {
         this._startDate = startDate;
         this._endDate = endDate;
         this._status = "Inactive";
+        this._taskList = [];
     }
 
     // Getters
@@ -268,12 +273,14 @@ class Sprint {
     get startDate() { return this._startDate; };
     get endDate() { return this._endDate; };
     get status() { return this._status; };
+    get taskList() { return this._taskList; };
 
     // Setters
     set title(newTitle) { this._title = newTitle; };
     set startDate(newDate) { this._startDate = newDate; };
     set endDate(newDate) { this._endDate = newDate; };
     set status(newStatus) { this._status = newStatus; };
+    set taskList(newTasks) { this._taskList = newTasks; };
 
     // Methods
     fromData(sprintObj) {
@@ -281,6 +288,7 @@ class Sprint {
         this._startDate = sprintObj._startDate;
         this._endDate = sprintObj._endDate;
         this._status = sprintObj._status;
+        this._taskList = sprintObj._taskList;
     }
 }
 
@@ -303,11 +311,191 @@ class Type{
     }
 }
 
+// Constants
+const viewTaskPopup = document.getElementById("view-task-popup");
+const editTaskPopup = document.getElementById("edit-task-popup");
+
+const overlay = document.getElementById("overlay");
+
+const high = "rgb(240,128,128)";
+const medium = "rgb(255,250,205)";
+const low = "rgb(152,251,152)";
+
 // Goes to the profile of the current logged in user
 function userProfile() {
     appStorage.selectedMember = appStorage.memberLoggedIn._memberId;
     updateLocalStorage(APP_DATA_KEY, appStorage);
     window.location.replace('member.html')
+}
+
+// Add Tasks
+function addTaskCard(task, id) {
+    if (!task.inSprint) {
+        let color = low;
+        if (task.priority == "High") {
+            color = high;
+        } else if (task.priority == "Medium") {
+            color = medium;
+        } else if (task.priority == "Low") {
+            color = low;
+        }
+
+        let spColor = "white";
+        if (task.storyPoint <= 10 && task.storyPoint > 0) {
+            spColor = low;
+        } else if (task.storyPoint > 10 && task.storyPoint <= 40) {
+            spColor = medium;
+        } else if (task.storyPoint > 40) {
+            spColor = high;
+        }
+
+        let types = ``
+        task.type.forEach(
+            typeIndex => 
+                types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
+
+        let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
+        let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
+        let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
+
+        let card = `<div class="task-card" id="task-${id}" onclick="openViewTaskPopup(${id})">
+                        <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
+                            <div class="task-type-container">${types}</div>
+                            <div class="task-member-container">${shortenMember}</div>
+                        </div>
+                    </div>`
+
+        taskContainer.insertAdjacentHTML('beforeend', card);
+    }
+}
+
+function addTask() {
+    let title = document.getElementById("add-task-title").value;
+    let member = document.getElementById("add-task-member").value;
+    let priority = document.getElementById("add-task-priority").value;
+    let sp = document.getElementById("add-task-sp").value;
+    let types = document.getElementById("add-task-type").selectedOptions;  // of type HTMLCollection
+    let description = document.getElementById("add-task-description").value;
+
+    let task = new Task(title, priority);
+    if (member) {
+        task.member = appStorage.memberList[member];
+    }
+    if (types) {
+        task.type = Array.from(types).map(({value}) => value);  // convert to array of indices
+    }
+    if (description) {
+        task.description = description;
+    }
+    if (sp) {
+        task.storyPoint = sp;
+    }
+    appStorage.taskList.push(task);
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    addTaskCard(task, appStorage.taskList.length - 1);
+    clearAddTaskData();
+    closeAddTaskPopup();
+}
+
+// View Task Details
+function openViewTaskPopup(id) {
+    let task = appStorage.taskList[id];
+    let types = "";
+    task.type.forEach(typeIndex => types += `<div class="task-pair">
+    <div class="task-type-name">${appStorage.typeList[typeIndex].title}</div>
+    <div class="task-type-color" style="background-color: ${appStorage.typeList[typeIndex].hexVal};"></div>
+    </div>`)
+
+    document.getElementById("view-task-title").innerHTML = task.title;
+    document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
+    document.getElementById("view-task-priority").innerHTML = task.priority;
+    document.getElementById("view-task-sp").innerHTML = task.storyPoint;
+    document.getElementById("view-task-type").innerHTML = task.type ? types : "";
+    document.getElementById("view-task-description").innerHTML = task.description;
+
+    document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
+                                                                        <button onclick="editTask(${id})">Edit Task</button>
+                                                                    </div>`
+
+    viewTaskPopup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+// Edit task
+function closeViewTaskPopup() {
+    viewTaskPopup.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+function closeEditTaskPopup() {
+    editTaskPopup.classList.remove("active");
+    viewTaskPopup.classList.add("active");
+}
+
+function editTask(id) {
+    viewTaskPopup.classList.remove("active");
+    editTaskPopup.classList.add("active");
+
+    let index = 0;
+
+    for(let i = 0; i < appStorage.memberList.length; i++){
+        if (appStorage.taskList[id].member == appStorage.memberList[i]){
+            index = i;
+        }
+    }
+
+    for(var i = 0; i < appStorage.typeList.length; i++){
+        var opt = appStorage.typeList[i];
+        var el = document.createElement("option");
+        el.setAttribute("id", opt.title)
+        el.textContent = opt.title;
+        el.value = i;
+        document.getElementById("edit-task-type").appendChild(el);
+    }
+
+    document.getElementById("edit-task-title").value = appStorage.taskList[id].title;
+    document.getElementById("edit-task-member").value = index;
+    document.getElementById("edit-task-priority").value = appStorage.taskList[id].priority;
+    document.getElementById("edit-task-sp").value = appStorage.taskList[id].storyPoint;
+    document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
+    document.getElementById("edit-task-description").value = appStorage.taskList[id].description;
+
+    let choice = `<button>Assign to User Story</button>
+    <button onclick="editTaskApply(${id})">Apply</button>
+    <button onclick="closeEditTaskPopup()">Cancel</button>`
+
+    // Delete task button only available in backlog.html
+    if (window.location.href.includes("backlog.html")) {
+        choice += `<button onclick="deleteTask(${id})">Delete</button>`
+    }
+
+    document.getElementById("edit-task-submit").innerHTML = choice;
+}
+
+function editTaskApply(id) {
+    let title = document.getElementById("edit-task-title").value;
+    let member = document.getElementById("edit-task-member").value;
+    let priority = document.getElementById("edit-task-priority").value;
+    let sp = document.getElementById("edit-task-sp").value;
+    let types = document.getElementById("edit-task-type").selectedOptions;
+    let desc = document.getElementById("edit-task-description").value
+
+    appStorage.taskList[id].title = title;
+    appStorage.taskList[id].member = appStorage.memberList[member];
+    appStorage.taskList[id].priority = priority;
+    appStorage.taskList[id].sp = sp;
+    appStorage.taskList[id].type = Array.from(types).map(({value}) => value);
+    appStorage.taskList[id].description = desc;
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.reload();
+}
+
+function deleteTask(id) {
+    appStorage.taskList.splice(id, 1);
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.reload();
 }
 
 // Upload data with the key into local storage
