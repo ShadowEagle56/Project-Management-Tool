@@ -29,17 +29,10 @@ function loadData() {
 }
 
 ////////////////////////////////// User Story //////////////////////////////////
-const overlay = document.getElementById("overlay");
 const addUSPopup = document.getElementById("add-us-popup");
 const usContainer = document.getElementById("us-items");
 const viewUSPopup = document.getElementById("view-us-popup");
 const editUSPopup = document.getElementById("edit-us-popup");
-const viewTaskPopup = document.getElementById("view-task-popup");
-const editTaskPopup = document.getElementById("edit-task-popup");
-
-const high = "rgb(240,128,128)";
-const medium = "rgb(255,250,205)";
-const low = "rgb(152,251,152)";
 
 // Add User Story Popup
 function openAddUSPopup() {
@@ -205,43 +198,45 @@ function clearAddTaskData() {
 }
 
 function addTaskCard(task, id) {
-    let color = low;
-    if (task.priority == "High") {
-        color = high;
-    } else if (task.priority == "Medium") {
-        color = medium;
-    } else if (task.priority == "Low") {
-        color = low;
+    if (!task.inSprint) {
+        let color = low;
+        if (task.priority == "High") {
+            color = high;
+        } else if (task.priority == "Medium") {
+            color = medium;
+        } else if (task.priority == "Low") {
+            color = low;
+        }
+
+        let spColor = "white";
+        if (task.storyPoint <= 10 && task.storyPoint > 0) {
+            spColor = low;
+        } else if (task.storyPoint > 10 && task.storyPoint <= 40) {
+            spColor = medium;
+        } else if (task.storyPoint > 40) {
+            spColor = high;
+        }
+
+        let types = ``
+        task.type.forEach(
+            typeIndex => 
+                types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
+
+        let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
+        let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
+        let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
+
+        let card = `<div class="task-card" id="task-${id}" onclick="openViewTaskPopup(${id})">
+                        <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
+                            <div class="task-type-container">${types}</div>
+                            <div class="task-member-container">${shortenMember}</div>
+                        </div>
+                    </div>`
+
+        taskContainer.insertAdjacentHTML('beforeend', card);
     }
-
-    let spColor = "white";
-    if (task.storyPoint <= 10 && task.storyPoint > 0) {
-        spColor = low;
-    } else if (task.storyPoint > 10 && task.storyPoint <= 40) {
-        spColor = medium;
-    } else if (task.storyPoint > 40) {
-        spColor = high;
-    }
-
-    let types = ``
-    task.type.forEach(
-        typeIndex => 
-            types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
-
-    let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
-    let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
-    let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
-
-    let card = `<div class="task-card" id="task-${id}" onclick="openViewTaskPopup(${id})">
-                    <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
-                    <div class="task-card-content">
-                        <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
-                        <div class="task-type-container">${types}</div>
-                        <div class="task-member-container">${shortenMember}</div>
-                    </div>
-                </div>`
-
-    taskContainer.insertAdjacentHTML('beforeend', card);
 }
 
 function addTask() {
@@ -270,100 +265,6 @@ function addTask() {
     addTaskCard(task, appStorage.taskList.length - 1);
     clearAddTaskData();
     closeAddTaskPopup();
-}
-
-// View Task Details
-function openViewTaskPopup(id) {
-    let task = appStorage.taskList[id];
-    let types = "";
-    task.type.forEach(typeIndex => types += `<div class="task-pair">
-    <div class="task-type-name">${appStorage.typeList[typeIndex].title}</div>
-    <div class="task-type-color" style="background-color: ${appStorage.typeList[typeIndex].hexVal};"></div>
-    </div>`)
-
-    document.getElementById("view-task-title").innerHTML = task.title;
-    document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
-    document.getElementById("view-task-priority").innerHTML = task.priority;
-    document.getElementById("view-task-sp").innerHTML = task.storyPoint;
-    document.getElementById("view-task-type").innerHTML = task.type ? types : "";
-    document.getElementById("view-task-description").innerHTML = task.description;
-
-    document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
-                                                                        <button onclick="editTask(${id})">Edit Task</button>
-                                                                    </div>`
-
-    viewTaskPopup.classList.add("active");
-    overlay.classList.add("active");
-}
-
-// Edit task
-
-function closeViewTaskPopup() {
-    viewTaskPopup.classList.remove("active");
-    overlay.classList.remove("active");
-}
-
-function closeEditTaskPopup() {
-    editTaskPopup.classList.remove("active");
-    viewTaskPopup.classList.add("active");
-}
-
-function editTask(id) {
-    viewTaskPopup.classList.remove("active");
-    editTaskPopup.classList.add("active");
-
-    let index = 0;
-
-    for(let i = 0; i < appStorage.memberList.length; i++){
-        if (appStorage.taskList[id].member == appStorage.memberList[i]){
-            index = i;
-        }
-    }
-
-    for(var i = 0; i < appStorage.typeList.length; i++){
-        var opt = appStorage.typeList[i];
-        var el = document.createElement("option");
-        el.setAttribute("id", opt.title)
-        el.textContent = opt.title;
-        el.value = i;
-        document.getElementById("edit-task-type").appendChild(el);
-    }
-
-    document.getElementById("edit-task-title").value = appStorage.taskList[id].title;
-    document.getElementById("edit-task-member").value = index;
-    document.getElementById("edit-task-priority").value = appStorage.taskList[id].priority;
-    document.getElementById("edit-task-sp").value = appStorage.taskList[id].storyPoint;
-    document.getElementById("edit-task-type").value = appStorage.taskList[id].type;
-    document.getElementById("edit-task-description").value = appStorage.taskList[id].description;
-
-    document.getElementById("edit-task-submit").innerHTML = `<button>Assign to User Story</button>
-                                                            <button onclick="editTaskApply(${id})">Apply</button>
-                                                            <button onclick="closeEditTaskPopup()">Cancel</button>
-                                                            <button onclick="deleteTask(${id})">Delete</button>`
-}
-
-function editTaskApply(id) {
-    let title = document.getElementById("edit-task-title").value;
-    let member = document.getElementById("edit-task-member").value;
-    let priority = document.getElementById("edit-task-priority").value;
-    let sp = document.getElementById("edit-task-sp").value;
-    let types = document.getElementById("edit-task-type").selectedOptions;
-    let desc = document.getElementById("edit-task-description").value
-
-    appStorage.taskList[id].title = title;
-    appStorage.taskList[id].member = appStorage.memberList[member];
-    appStorage.taskList[id].priority = priority;
-    appStorage.taskList[id].sp = sp;
-    appStorage.taskList[id].type = Array.from(types).map(({value}) => value);
-    appStorage.taskList[id].description = desc;
-    updateLocalStorage(APP_DATA_KEY, appStorage);
-    window.location.reload();
-}
-
-function deleteTask(id) {
-    appStorage.taskList.splice(id, 1);
-    updateLocalStorage(APP_DATA_KEY, appStorage);
-    window.location.reload();
 }
 
 // Filter

@@ -45,10 +45,10 @@
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     row-gap: 15px;
     column-gap: 15px;
-    max-height: 80%;
+    max-height: 500px;
     overflow: scroll;
 }
 
@@ -61,7 +61,7 @@
     border-radius: 10px;
     background-color: white;
     display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 5fr;
     padding: 20px;
     width: 20%;
     transform: translate(-50%, -50%) scale(0);

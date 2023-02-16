@@ -4,7 +4,6 @@ const APP_DATA_KEY = "ScrumPMTData";
 
 const addSprintPopup = document.getElementById("add-sprint-popup");
 const delSprintPopup = document.getElementById("delete-sprint-popup");
-const overlay = document.getElementById("overlay");
 
 function openAddSprintPopup() {
     addSprintPopup.classList.add("active");
