@@ -31,25 +31,14 @@ function addSprint() {
     window.location.reload();
 }
 
-function deleteSprint(sprintTitle){
-    appStorage.removeItem("sprintList", sprintTitle);
-    updateLocalStorage(APP_DATA_KEY, appStorage);
-    document.getElementById("sprint-card-"+sprintTitle);
-    window.location.reload();
-}
-
 function addSprintCard(sprint, i) {
     let sprintContainer = document.getElementById("sprint-container");
-    // button is in the middle
+
     let card = `<div class="sprint-card" id="sprint-card-${i}" onclick="openSprintPage(${i})">
                     <div class="card-title">${sprint.title}</div>
                     <div class="card-date">${sprint.startDate} - ${sprint.endDate}</div>
                     <div class="card-status">${sprint.status}</div>
                 </div>`
-                //     <div class="add-sprint-submit">
-                //         <button class="close-button" onclick="deleteSprint('${sprint.title}')">Delete Sprint</button>
-                //     </div>
-                // </div>
 
     sprintContainer.insertAdjacentHTML('beforeend', card);
 }

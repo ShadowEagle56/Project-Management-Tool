@@ -6,7 +6,6 @@ const APP_DATA_KEY = "ScrumPMTData";
 const dateContainer = document.getElementById("active-date");
 const statusContainer = document.getElementById("active-status");
 const sprintName = document.getElementById("active-title");
-const overlay = document.getElementById("overlay");
 
 // Loads all relevant data 
 function loadData() {
