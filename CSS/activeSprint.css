@@ -73,3 +73,13 @@
     margin-right: 10px;
     height: 100%;
 }
+
+/* Task Card */
+.task-status-buttons {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}

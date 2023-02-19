@@ -197,6 +197,76 @@ function clearAddTaskData() {
     document.getElementById("add-task-sp").value = 0;
 }
 
+function addTaskCard(task, id) {
+    if (!task.inSprint) {
+        let color = low;
+        if (task.priority == "High") {
+            color = high;
+        } else if (task.priority == "Medium") {
+            color = medium;
+        } else if (task.priority == "Low") {
+            color = low;
+        }
+
+        let spColor = "white";
+        if (task.storyPoint <= 10 && task.storyPoint > 0) {
+            spColor = low;
+        } else if (task.storyPoint > 10 && task.storyPoint <= 40) {
+            spColor = medium;
+        } else if (task.storyPoint > 40) {
+            spColor = high;
+        }
+
+        let types = ``
+        task.type.forEach(
+            typeIndex => 
+                types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
+
+        let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
+        let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
+        let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
+
+        let card = `<div class="task-card" id="task-${id}" onclick="openViewTaskPopup(${id})">
+                        <div class="task-card-header" style="background-color: ${color};">${task.title}</div>
+                        <div class="task-card-content">
+                            <div class="story-point" style="background-color: ${spColor};">SP ${task.storyPoint}</div>
+                            <div class="task-type-container">${types}</div>
+                            <div class="task-member-container">${shortenMember}</div>
+                        </div>
+                    </div>`
+
+        taskContainer.insertAdjacentHTML('beforeend', card);
+    }
+}
+
+function addTask() {
+    let title = document.getElementById("add-task-title").value;
+    let member = document.getElementById("add-task-member").value;
+    let priority = document.getElementById("add-task-priority").value;
+    let sp = document.getElementById("add-task-sp").value;
+    let types = document.getElementById("add-task-type").selectedOptions;  // of type HTMLCollection
+    let description = document.getElementById("add-task-description").value;
+
+    let task = new Task(title, priority);
+    if (member) {
+        task.member = appStorage.memberList[member];
+    }
+    if (types) {
+        task.type = Array.from(types).map(({value}) => value);  // convert to array of indices
+    }
+    if (description) {
+        task.description = description;
+    }
+    if (sp) {
+        task.storyPoint = sp;
+    }
+    appStorage.taskList.push(task);
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    addTaskCard(task, appStorage.taskList.length - 1);
+    clearAddTaskData();
+    closeAddTaskPopup();
+}
+
 // Filter
 const filterPopup = document.getElementById("filter-popup");
 

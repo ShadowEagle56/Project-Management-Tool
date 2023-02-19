@@ -15,6 +15,9 @@ const removeTasks = document.getElementById("remove-task");
 
 // Sprint Settings
 const sprintSettingsPopup = document.getElementById("sprint-settings-popup");
+const settingsTitle = document.getElementById("sprint-settings-title");
+const settingsStart = document.getElementById("sprint-settings-start-date");
+const settingsEnd = document.getElementById("sprint-settings-end-date");
 
 // Loads all relevant data 
 function loadData() {
@@ -109,11 +112,12 @@ function addRemoveTask() {
     let add = addTasks.selectedOptions;
     let remove = removeTasks.selectedOptions;
 
-    if (add && !add === "") {
+    if (add !== "") {
         let selectedAdd = Array.from(add).map(({value}) => value);
 
         for (let i = 0; i < selectedAdd.length; i++) {
             appStorage.sprintList[appStorage.currentSprint]._taskList.push(selectedAdd[i]);
+            console.log("h")
         }
         appStorage.sprintList[appStorage.currentSprint]._taskList.sort();
 
@@ -122,7 +126,7 @@ function addRemoveTask() {
         }
     }
 
-    if (remove && !add === "") {
+    if (remove !== "") {
         let selectedRemove = Array.from(remove).map(({value}) => value);
 
         for (let i = 0; i < selectedRemove.length; i++) {
@@ -139,6 +143,14 @@ function addRemoveTask() {
 
 /////////////////////////////// Sprint Settings ////////////////////////////////
 function openSprintSettings() {
+    let title = appStorage.sprintList[appStorage.currentSprint].title;
+    let startDate = appStorage.sprintList[appStorage.currentSprint].startDate;
+    let endDate = appStorage.sprintList[appStorage.currentSprint].endDate;
+
+    settingsTitle.value = title;
+    settingsStart.value = startDate;
+    settingsEnd.value = endDate;
+
     overlay.classList.add("active");
     sprintSettingsPopup.classList.add("active");
 }
@@ -148,9 +160,40 @@ function closeSprintSettings() {
     sprintSettingsPopup.classList.remove("active");
 }
 
+function applySprintSettings() {
+    let sprint = appStorage.sprintList[appStorage.currentSprint];
+
+    // Validation - No field can be left empty
+    if (settingsTitle.value && settingsStart.value && settingsEnd.value) {
+        sprint.title = settingsTitle.value;
+        sprint.startDate = settingsStart.value;
+        sprint.endDate = settingsEnd.value;
+    } else {
+        alert("Please make sure all fields have been filled.")
+    }
+
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    window.location.reload();
+}
+
+function deleteSprint(){
+    let confirmation = confirm("Are you sure you want to delete this sprint? This action is irreversible!");
+
+    if (confirmation) {
+        for (let i = 0; i < appStorage.sprintList[appStorage.currentSprint].taskList.length; i++) {
+            appStorage.taskList[appStorage.sprintList[appStorage.currentSprint].taskList[i]].inSprint = false;
+        }
+        appStorage.sprintList.splice(appStorage.currentSprint, 1)
+        updateLocalStorage(APP_DATA_KEY, appStorage);
+        window.location.replace("sprintList.html");
+    }
+}
+
 function confirmationStart() {
     let confirmation = confirm("Are you sure you want to start the sprint? No further changes can be made once the sprint has started.");
     if (confirmation) {
+        appStorage.sprintList[appStorage.currentSprint].status = "Active";
+        updateLocalStorage(APP_DATA_KEY, appStorage);
         window.location.replace("activeSprint.html");
     }
 }
