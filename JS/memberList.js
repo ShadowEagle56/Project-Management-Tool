@@ -2,7 +2,6 @@
 
 const APP_DATA_KEY = "ScrumPMTData";
 
-const overlay = document.getElementById("overlay");
 const addMemberPopup = document.getElementById("add-member-popup")
 
 // Add Member Popup
