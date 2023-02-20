@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="CSS/shared.css">
         <link rel="stylesheet" href="CSS/activeSprint.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body onload="loadData()">
         <div class="header">
@@ -80,7 +81,7 @@
     </div>
 
     <!-- Track Time Popup -->
-    <div class="time-popup active" id="time-popup">
+    <div class="time-popup" id="time-popup">
         <div class="time-popup-header">
             <div class="popup-title">Track Time</div>
             <div>
@@ -114,7 +115,13 @@
             <button>Add</button>
         </div>
 
-        <div class="time-container" id="time-container"></div>
+        <div class="time-container" id="time-container">
+            <!-- Placeholder for testing -->
+            <div class="time-pair">
+                <div class="input-time-dates">2022-02-01 : 1 day 1 hour 30 minutes</div>
+                <div i class="fa fa-trash-o"></i></div>
+            </div>
+        </div>
     </div>
 
     <script src="JS/shared.js"></script>
