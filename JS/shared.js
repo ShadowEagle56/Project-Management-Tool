@@ -344,9 +344,15 @@ function openViewTaskPopup(id) {
     document.getElementById("view-task-type").innerHTML = task.type ? types : "";
     document.getElementById("view-task-description").innerHTML = task.description;
 
-    document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
+    if (window.location.href.includes("activeSprint")) {
+        document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
+                                                                        <button onclick="openTrackTimePopup(${id})">Track Time</button>
+                                                                    </div>`
+    } else {
+        document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
                                                                         <button onclick="editTask(${id})">Edit Task</button>
                                                                     </div>`
+    }
 
     viewTaskPopup.classList.add("active");
     overlay.classList.add("active");

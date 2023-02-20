@@ -12,6 +12,9 @@ const inactive = document.getElementById("todo-tasks-container");
 const inProgress = document.getElementById("inprogress-tasks-container");
 const completed = document.getElementById("completed-tasks-container")
 
+// Track Time
+const trackPopup = document.getElementById("time-popup");
+
 // Loads all relevant data 
 function loadData() {
     let current = appStorage.sprintList[appStorage.currentSprint];
@@ -82,10 +85,8 @@ function loadData() {
                         <div>
                             <button onclick="moveToTODO(${i})">&larr;</button>
                         </div>
-                        <div>
-                            <button>Track Time</button>
-                        </div>
-                        <div>
+
+                        <div style="grid-column: 3;">
                             <button onclick="moveToCompleted(${i})">&rarr;</button>
                         </div>
                     </div>
@@ -98,9 +99,6 @@ function loadData() {
             card += `<div class="task-status-buttons">
                         <div>
                             <button onclick="moveToInProgress(${i})">&larr;</button>
-                        </div>
-                        <div>
-                            <button>Track Time</button>
                         </div>
                     </div>
                 </div>`
@@ -125,6 +123,17 @@ function moveToCompleted(index) {
     appStorage.taskList[index].status = "Completed";
     updateLocalStorage(APP_DATA_KEY, appStorage);
     window.location.reload();
+}
+
+function openTrackTimePopup(index) {
+    viewTaskPopup.classList.remove("active");
+    trackPopup.classList.add("active");
+    overlay.classList.add("active");
+}
+
+function closeTrackTimePopup() {
+    trackPopup.classList.remove("active");
+    viewTaskPopup.classList.add("active");
 }
 
 // Confirmation to end current sprint

@@ -83,3 +83,63 @@
     padding-left: 10px;
     padding-bottom: 10px;
 }
+
+/* Track Time */
+.time-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr 5fr;
+    padding: 20px;
+    width: 500px;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.time-popup-header {
+    display: grid;
+    grid-template-columns: 30fr 1fr;
+    font-weight: bold;
+    text-align: center;
+    font-size: larger;
+}
+
+.close-button {
+    float: right;
+}
+
+.time-popup-body {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.time-title {
+    font-weight: bold;
+}
+
+.time-input {
+    width: 40px;
+}
+
+.time-submit {
+    margin-top: 5px;
+    justify-self: center;
+}
+
+.time-container {
+    margin-top: 15px;
+    border: 1px solid black;
+    overflow: scroll;
+    max-height: 150px;
+}
+
+.time-popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}

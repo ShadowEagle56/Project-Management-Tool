@@ -45,6 +45,73 @@
 
     <div id="overlay"></div>
 
+    <!-- Task Details Popup -->
+    <div class="view-task-popup" id="view-task-popup">
+        <div class="view-task-popup-header">
+            <div class="popup-title">View Task</div>
+            <div>
+                <button class="close-button" onclick="closeViewTaskPopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="view-task-popup-body">
+            <div class="task-title">Title:</div>
+            <div class="task-details" id="view-task-title"></div>
+
+            <div class="task-title">Member:</div>
+            <div class="task-details" id="view-task-member"></div>
+
+            <div class="task-title">Priority:</div>
+            <div class="task-details" id="view-task-priority"></div>
+
+            <div class="task-title">Story Point: </div>
+            <div class="task-details" id="view-task-sp"></div>
+
+            <div class="task-title">Type:</div>
+            <div class="task-type-details" id="view-task-type"></div>
+
+            <div class="task-title">Description:</div>
+            <div class="task-details" id="view-task-description"></div>
+        </div>
+
+        <div class="view-task-button-container" id="view-task-button-container">
+            
+        </div>
+    </div>
+
+    <!-- Track Time Popup -->
+    <div class="time-popup" id="time-popup">
+        <div class="time-popup-header">
+            <div class="popup-title">Track Time</div>
+            <div>
+                <button class="close-button" onclick="closeTrackTimePopup()">&times;</button>
+            </div>
+        </div>
+
+        <div class="time-popup-body">
+            <div class="time-title">Days</div>
+            <div>
+                <input type="number" id="time-day" value="0" class="time-input" min="0">
+            </div>
+
+            <div class="time-title">Hours</div>
+            <div>
+                <input type="number" id="time-hour" value="0" class="time-input" min="0">
+            </div>
+
+            <div class="time-title">Minutes</div>
+            <div>
+                <input type="number" id="time-min" value="0" class="time-input" min="0">
+            </div>
+        </div>
+        
+        <div class="time-submit">
+            <button>Add</button>
+        </div>
+
+        <div class="time-container" id="time-container"></div>
+    </div>
+
     <script src="JS/shared.js"></script>
     <script src="JS/activeSprint.js"></script>
 </html>
