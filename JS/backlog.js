@@ -36,17 +36,10 @@ function loadData() {
 }
 
 ////////////////////////////////// User Story //////////////////////////////////
-const overlay = document.getElementById("overlay");
 const addUSPopup = document.getElementById("add-us-popup");
 const usContainer = document.getElementById("us-items");
 const viewUSPopup = document.getElementById("view-us-popup");
 const editUSPopup = document.getElementById("edit-us-popup");
-const viewTaskPopup = document.getElementById("view-task-popup");
-const editTaskPopup = document.getElementById("edit-task-popup");
-
-const high = "rgb(240,128,128)";
-const medium = "rgb(255,250,205)";
-const low = "rgb(152,251,152)";
 
 // Add User Story Popup
 function openAddUSPopup() {

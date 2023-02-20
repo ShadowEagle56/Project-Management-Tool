@@ -1,3 +1,4 @@
+/* Header for all pages */
 .header {
     background-color: royalblue;
     overflow: hidden;
@@ -97,6 +98,89 @@
     max-width: 50px;
     text-align: center;
     padding: 2px;
+}
+
+/* Popups */
+.view-task-popup, .edit-task-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    padding: 20px;
+    width: 30%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.view-task-popup-header, .edit-task-popup-header{
+    display: grid;
+    grid-template-columns: 30fr 1fr;
+    font-weight: bold;
+    text-align: center;
+    font-size: larger;
+}
+
+.close-button {
+    float: right;
+}
+
+.view-task-popup-body, .edit-task-popup-body {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    justify-self: center;
+}
+
+.input-text {
+    width: 100%;
+}
+
+.view-task-popup.active, .edit-task-popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.add-task-submit {
+    padding-top: 20px;
+    justify-self: center;
+}
+
+.view-task-button-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.view-task-edit-button {
+    grid-column: 1 / 2;
+}
+
+
+.task-type-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 8px;
+    row-gap: 8px;
+}
+
+.task-pair {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+}
+
+.task-type-name {
+    justify-self: right;
+}
+
+.task-type-color {
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
 }
 
 #overlay {

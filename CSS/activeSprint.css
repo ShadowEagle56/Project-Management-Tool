@@ -1,0 +1,75 @@
+/* Main */
+.active-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 30fr;
+    margin: 40px 10px 0px 10px;
+}
+
+.active-title {
+    font-size: large;
+    font-weight: bold;
+}
+
+.active-info-end {
+    grid-column: 2 / 4;
+    display: flex;
+    column-gap: 10px;
+    justify-content: right;
+}
+
+.active-date {
+    border: 1px solid black;
+    text-align: center;
+    width: 200px;
+}
+
+.active-status {
+    border: 1px solid black;
+    text-align: center;
+    width: 100px;
+}
+
+.container-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
+.active-tasks-container {
+    padding: 20px;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    row-gap: 15px;
+    column-gap: 15px;
+    max-height: 500px;
+    overflow: scroll;
+}
+
+.active-inactive-tasks {
+    margin-top: 20px;
+    grid-column: 1;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.active-inprogress-tasks {
+    margin-top: 20px;
+    grid-column: 2;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.active-completed-tasks {
+    margin-top: 20px;
+    grid-column: 3;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-right: 10px;
+    height: 100%;
+}

@@ -171,7 +171,7 @@
 }
 
 /* Popups */
-.add-us-popup, .view-us-popup, .edit-us-popup, .add-task-popup, .view-task-popup, .edit-task-popup {
+.add-us-popup, .view-us-popup, .edit-us-popup, .add-task-popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -185,7 +185,7 @@
     transform: translate(-50%, -50%) scale(0);
 }
 
-.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .view-task-popup-header, .edit-task-popup-header, .add-type-popup-header, .filter-popup-header, .legend-popup-header {
+.add-us-popup-header, .view-us-popup-header, .edit-us-popup-header, .add-task-popup-header, .add-type-popup-header, .filter-popup-header, .legend-popup-header {
     display: grid;
     grid-template-columns: 30fr 1fr;
     font-weight: bold;
@@ -193,11 +193,7 @@
     font-size: larger;
 }
 
-.close-button {
-    float: right;
-}
-
-.add-us-popup-body, .view-us-popup-body, .edit-us-popup-body, .add-task-popup-body, .view-task-popup-body, .edit-task-popup-body {
+.add-us-popup-body, .view-us-popup-body, .edit-us-popup-body, .add-task-popup-body {
     margin-top: 10px;
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -215,26 +211,23 @@
     grid-column: 2;
 }
 
-.input-text {
-    width: 100%;
-}
 
-.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .view-task-popup.active, .edit-task-popup.active, .add-type-popup.active, .filter-popup.active, .legend-popup.active {
+.add-us-popup.active, .view-us-popup.active, .edit-us-popup.active, .add-task-popup.active, .add-type-popup.active, .filter-popup.active, .legend-popup.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.add-us-submit, .add-task-submit {
+.add-us-submit {
     padding-top: 20px;
     justify-self: center;
 }
 
-.view-us-button-container, .view-task-button-container {
+.view-us-button-container {
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
-.view-us-edit-button, .view-task-edit-button {
+.view-us-edit-button {
     grid-column: 1 / 2;
 }
 
@@ -242,28 +235,6 @@
     grid-column: 2;
 }
 
-.task-type-details {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 8px;
-    row-gap: 8px;
-}
-
-.task-pair {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 5px;
-}
-
-.task-type-name {
-    justify-self: right;
-}
-
-.task-type-color {
-    border: 1px solid black;
-    width: 15px;
-    height: 15px;
-}
 
 /* Filter Popup */
 .filter-popup {
