@@ -15,9 +15,9 @@ function memberDetails() {
     let complete = 0;
 
     for (let i = 0; i < appStorage.taskList.length; i++) {
-        if (appStorage.taskList[i].member._firstName == fname && appStorage.taskList[i].member._lastName == lname && appStorage.taskList[i].status != "Complete") {
+        if (appStorage.taskList[i].member._firstName == fname && appStorage.taskList[i].member._lastName == lname && appStorage.taskList[i].status != "Completed") {
             incomplete += 1;
-        } else if (appStorage.taskList[i].member._firstName == fname && appStorage.taskList[i].member._lastName == lname && appStorage.taskList[i].status == "Complete") {
+        } else if (appStorage.taskList[i].member._firstName == fname && appStorage.taskList[i].member._lastName == lname && appStorage.taskList[i].status == "Completed") {
             complete += 1;
         }
     }

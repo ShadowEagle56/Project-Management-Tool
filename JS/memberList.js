@@ -64,7 +64,7 @@ function loadData() {
     let incomplete = 0;
     let complete = 0;
     for (let i=0; i < appStorage.taskList.length; i++) {
-        if (appStorage.taskList[i] != "Complete") {
+        if (appStorage.taskList[i].status != "Completed") {
             incomplete += 1;
         } else {
             complete += 1;

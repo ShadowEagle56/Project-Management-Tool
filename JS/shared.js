@@ -154,7 +154,7 @@ class Task {
         this._index;
         this._status = "To Do";
         this._sprint;
-        this._timeSpent;
+        this._timeList = [];
         this._totalHour = 0;
         this._userStory;
         this._inSprint = false;
@@ -173,7 +173,7 @@ class Task {
     get index() { return this._index; };
     get status() { return this._status; };
     get sprint() { return this._sprint; };
-    get timeSpent() { return this._timeSpent; };
+    get timeList() { return this._timeList; };
     get totalHour() { return this._totalHour; };
     get userStory() { return this._userStory; };
     get inSprint() { return this._inSprint; };
@@ -217,7 +217,7 @@ class Task {
         this._index = taskObj._index;
         this._status = taskObj._status;
         this._sprint = taskObj._sprint;
-        this._timeSpent = taskObj._timeSpent;
+        this._timeList = taskObj._timeList;
         this._userStory = taskObj._userStory;
         this._inSprint = taskObj._inSprint;
     };
