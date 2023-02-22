@@ -14,6 +14,7 @@ const completed = document.getElementById("completed-tasks-container")
 
 // Track Time
 const trackPopup = document.getElementById("time-popup");
+const timeContainer = document.getElementById("time-container");
 
 // Loads all relevant data 
 function loadData() {
@@ -56,7 +57,7 @@ function loadData() {
                 types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
 
         let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
-        let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
+        let name = (task.member) ? appStorage.memberList[task.member]._firstName + " " + appStorage.memberList[task.member]._lastName : "";
         let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
 
 
@@ -126,6 +127,19 @@ function moveToCompleted(index) {
 }
 
 function openTrackTimePopup(index) {
+    let template = ``;
+
+    for (let i = 0; i < appStorage.memberList[appStorage.taskList[index].member].contribution.length; i++) {
+        let member = appStorage.memberList[appStorage.taskList[index].member].contribution[i];
+        let date = member[0].slice(0,10);
+        let hour = parseInt(member[1]);
+        let min = (member[1] - parseInt(member[1])) * 60 > 0 ? parseInt((member[1] - parseInt(member[1])) * 60) : 0;
+        template = `<div class="time-pair">
+                        <div class="input-time-dates">${date} : ${hour} hour(s) ${min} minute(s)</div>
+                        <div i class="fa fa-trash-o" onclick="deleteTimeLog(${i})"></i></div>
+                    </div>`
+        timeContainer.insertAdjacentHTML('beforeend', template);
+    }
     viewTaskPopup.classList.remove("active");
     trackPopup.classList.add("active");
     overlay.classList.add("active");
@@ -160,9 +174,31 @@ function addTime(){
     updateLocalStorage(APP_DATA_KEY, appStorage);
 }
 
+function deleteTimeLog(index) {
+    // Todo
+}
+
 function closeTrackTimePopup() {
+    timeContainer.innerHTML = "";
     trackPopup.classList.remove("active");
     viewTaskPopup.classList.add("active");
+}
+
+function addTrackedTime(index) {
+    let date = document.getElementById("time-date").value;
+    let hour = document.getElementById("time-hour").value;
+    let min = document.getElementById("time-min").value;
+
+    appStorage.memberList[appStorage.taskList[index].member].addContribution(date, hour, min);
+    console.log(appStorage.memberList[appStorage.taskList[index].member])
+
+    let template = `<div class="time-pair">
+                        <div class="input-time-dates">${date.slice(0,10)} : ${hour} hour(s) ${min} minute(s)</div>
+                        <div i class="fa fa-trash-o"></i></div>
+                    </div>`
+    timeContainer.insertAdjacentHTML('beforeend', template);
+    updateLocalStorage(APP_DATA_KEY, appStorage);
+    // window.location.reload();
 }
 
 // Confirmation to end current sprint

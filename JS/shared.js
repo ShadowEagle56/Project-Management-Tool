@@ -118,11 +118,32 @@ class Member {
     set email(newEmail) { this._email = newEmail; };
     set password(newPass) { this._password = newPass; };
     set role(newRole) { this._role = newRole; };
+    set contribution(newC) { this._contribution = newC};
     set memberId(newId) { this._memberId = newId; };
 
     // Methods
     addContribution(d, h, m) {
-        let date = new Date(d);
+        let date =  new Date(d)
+        
+        if (this._contribution.length != 0 && !this._contribution.includes(date)){
+            for(let i = 0; i < this._contribution.length; i++){
+                console.log(this._contribution[i][0])
+                if (this._contribution[i][0].slice(0,10) == date.toISOString().slice(0,10)){
+                    let time =  parseFloat(h) + (parseFloat(m)/60);
+                    let totalTime =  time + parseFloat(this._contribution[i][1])
+                    this._contribution[i][1] = totalTime.toFixed(2)
+                    break
+                } else {
+                    let time =  parseFloat(h) + (parseFloat(m)/60);
+                    let data = [date, time.toFixed(2)]
+                    this._contribution.push(data)
+                    break
+                }
+            }
+        } else {
+            let time =  parseFloat(h) + (parseFloat(m)/60);
+            this._contribution.push([date, time.toFixed(2)])
+        }
     };
 
     addStoryPoint(p) {
@@ -135,6 +156,9 @@ class Member {
         this._email = memberObj._email;
         this._password = memberObj._password;
         this._role = memberObj._role;
+        this._contribution = memberObj._contribution;
+        this._memberId = memberObj._id;
+        this._totalStoryPoint = memberObj._totalStoryPoint;
     };
 };
 
@@ -155,7 +179,7 @@ class Task {
         this._status = "To Do";
         this._sprint;
         this._timeList = [];
-        this._totalHour = 0;
+        // this._totalHour = 0;
         this._userStory;
         this._inSprint = false;
     };
@@ -174,7 +198,7 @@ class Task {
     get status() { return this._status; };
     get sprint() { return this._sprint; };
     get timeList() { return this._timeList; };
-    get totalHour() { return this._totalHour; };
+    // get totalHour() { return this._totalHour; };
     get userStory() { return this._userStory; };
     get inSprint() { return this._inSprint; };
 
@@ -195,14 +219,14 @@ class Task {
     set inSprint(newStatus) { this._inSprint = newStatus; };
 
     // Methods
-    addRecord(date, hour, minute) {
-        let totalTime =  parseFloat(hour) + (parseFloat(minute)/60);
-        let record = [date, totalTime];
-        this._timeSpent.push(record);
-        let total = totalTime + parseFloat(this._totalHour);
-        this._totalHour = total.toFixed(2)
-        updateLocalStorage(APP_DATA_KEY, appStorage)
-    };
+    // addRecord(date, hour, minute) {
+    //     let totalTime =  parseFloat(hour) + (parseFloat(minute)/60);
+    //     let record = [date, totalTime];
+    //     this._timeSpent.push(record);
+    //     let total = totalTime + parseFloat(this._totalHour);
+    //     this._totalHour = total.toFixed(2)
+    //     updateLocalStorage(APP_DATA_KEY, appStorage)
+    // };
 
     fromData(taskObj) {
         this._title = taskObj._title;
@@ -343,7 +367,7 @@ const low = "rgb(152,251,152)";
 
 // Goes to the profile of the current logged in user
 function userProfile() {
-    appStorage.selectedMember = appStorage.memberLoggedIn._memberId;
+    appStorage.selectedMember = appStorage.memberLoggedIn;
     updateLocalStorage(APP_DATA_KEY, appStorage);
     window.location.replace('member.html')
 }
@@ -358,7 +382,7 @@ function openViewTaskPopup(id) {
     </div>`)
 
     document.getElementById("view-task-title").innerHTML = task.title;
-    document.getElementById("view-task-member").innerHTML = task.member ? task.member._firstName + " " + task.member._lastName : "";
+    document.getElementById("view-task-member").innerHTML = task.member ? appStorage.memberList[task.member]._firstName + " " + appStorage.memberList[task.member]._lastName : "";
     document.getElementById("view-task-priority").innerHTML = task.priority;
     document.getElementById("view-task-sp").innerHTML = task.storyPoint;
     document.getElementById("view-task-type").innerHTML = task.type ? types : "";
@@ -368,6 +392,8 @@ function openViewTaskPopup(id) {
         document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
                                                                         <button onclick="openTrackTimePopup(${id})">Track Time</button>
                                                                     </div>`
+
+        document.getElementById("time-submit").innerHTML = `<button onclick="addTrackedTime(${id})">Add</button>`
     } else {
         document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
                                                                         <button onclick="editTask(${id})">Edit Task</button>

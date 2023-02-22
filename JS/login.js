@@ -23,7 +23,7 @@ function loginValidation(){
     for (let i = 0; i < appStorage.memberList.length; i++){
         if (userEmail == appStorage.memberList[i].email){
             if (userPass == appStorage.memberList[i].password) {
-                appStorage.memberLoggedIn = appStorage.memberList[i];
+                appStorage.memberLoggedIn = i;
                 updateLocalStorage(APP_DATA_KEY, appStorage);
                 login.classList.remove("active");
                 buttonChoice.classList.add("active");
