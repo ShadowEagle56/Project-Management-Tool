@@ -72,12 +72,88 @@ function loadData() {
     }
     document.getElementById("incomplete-tasks").innerHTML = incomplete;
     document.getElementById("complete-tasks").innerHTML = complete;
+
+    createChart();
 }
 
+// Chart generator
 function redirectMember(id) {
     appStorage.selectedMember = id;
     updateLocalStorage(APP_DATA_KEY, appStorage);
     window.location = "member.html";
+}
+
+// Get the dates recorded by each member
+function getData(startDate, endDate){
+    let datesArr = getDates(startDate, endDate);
+    let temp = [];
+    for (let i = 0; i < appStorage.memberList.length; i++){
+        let arr = []
+        for (let j = 0; j < datesArr.length; j++){
+            let checked = false;
+            let index = 0;
+            for (let k = 0; k < appStorage.memberList[i].contribution.length; k++){
+                if (appStorage.memberList[i].contribution[k][0].toISOString().slice(0,10) == datesArr[j]){
+                    checked = true;
+                    index = k;
+                }
+            }
+            if (checked == true){
+                arr.push(applicationList.memberList[i].contribution[index][1]);
+            } else {
+                arr.push(0);
+            }
+        }
+        let dataset = {
+            label: appStorage.memberList[i].firstName + " " + appStorage.memberList[i].lastName,
+            backgroundColor: color[i],
+            data: arr,
+        }
+        temp.push(dataset)
+    }
+    return temp
+}
+
+function createChart(startDate=getDefaultDate()[0], endDate=getDefaultDate()[1]){
+    let datesArr = getDates(startDate, endDate);
+
+    var ctx = document.getElementById("member-chart").getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: datesArr,
+            datasets: getData(startDate, endDate),
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Overall Team Performance'
+            },
+            responsive: true,
+            legend: {
+                position: 'bottom'
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Dates"
+                    }
+                }],
+                yAxes: [{
+                    ticks:{
+                        min: 0
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Time spent (Hours)"
+                    }
+                }],
+            },
+            maintainAspectRatio: false,
+            
+        }
+    })
 }
 
 

@@ -427,6 +427,43 @@ function deleteTask(id) {
     window.location.reload();
 }
 
+// Charts
+// Color array for bar chart
+let color = [
+    "Aqua","Aquamarine","Bisque","Black","Blue","BlueViolet","Brown","BurlyWood","CadetBlue",
+    "Chartreuse","Chocolate","Coral","CornflowerBlue","Crimson","Cyan","DarkBlue","DarkCyan",
+    "DarkGoldenRod","DarkGray","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen",
+    "DarkOrange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue",
+    "DarkSlateGray","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGrey",
+    "DodgerBlue","FireBrick","ForestGreen","Fuchsia","Gold","GoldenRod","Gray","Green",
+    "GreenYellow","HotPink","IndianRed","Indigo","Khaki","LawnGreen","LightBlue","LightCoral",
+    "LightGray","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue",
+    "LightSlateGray","LightSteelBlue","Lime","LimeGreen","Magenta","Maroon",
+    "MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen",
+    "MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue",
+    "Moccasin","Navy","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod",
+    "PaleGreen","PaleTurquoise","PaleVioletRed","PeachPuff","Peru","Pink","Plum","PowderBlue",
+    "Purple","RebeccaPurple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown",
+    "SeaGreen","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SpringGreen","SteelBlue",
+    "Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","Yellow","YellowGreen",
+];
+
+function getDates(startDate, stopDate) {
+    var dateArray = [];
+    var currentDate = moment(startDate);
+    var stopDate = moment(stopDate);
+    while (currentDate <= stopDate) {
+        dateArray.push( String(moment(currentDate).format('YYYY-MM-DD')) )
+        currentDate = moment(currentDate).add(1, 'days');
+    }
+    dateArray.push( String(moment(currentDate).format('YYYY-MM-DD')) )
+    return dateArray;
+}
+
+function getDefaultDate() {
+    return [new Date(), new Date()];
+}
+
 // Upload data with the key into local storage
 function updateLocalStorage(key, data) {
     let dataString = JSON.stringify(data);  // Convert object into string
