@@ -90,9 +90,9 @@
         </div>
 
         <div class="time-popup-body">
-            <div class="time-title">Date</div>
+            <div class="time-title">Days</div>
             <div>
-                <input type="date" id="time-date">
+                <input type="number" id="time-day" value="0" class="time-input" min="0">
             </div>
 
             <div class="time-title">Hours</div>
@@ -104,9 +104,14 @@
             <div>
                 <input type="number" id="time-min" value="0" class="time-input" min="0" max="60">
             </div>
+
+            <div class="time-title">Date</div>
+            <div style="grid-column: 2 / 4;">
+                <input type="date" id="time-date">
+            </div>
         </div>
         
-        <div class="time-submit">
+        <div class="time-submit" id="time-submit">
             <button onclick="addTime()">Add</button>
         </div>
     </div>

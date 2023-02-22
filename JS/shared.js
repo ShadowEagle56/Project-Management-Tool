@@ -393,7 +393,6 @@ function openViewTaskPopup(id) {
                                                                         <button onclick="openTrackTimePopup(${id})">Track Time</button>
                                                                     </div>`
 
-        document.getElementById("time-submit").innerHTML = `<button onclick="addTrackedTime(${id})">Add</button>`
     } else {
         document.getElementById("view-task-button-container").innerHTML = `<div class="view-task-edit-button">
                                                                         <button onclick="editTask(${id})">Edit Task</button>

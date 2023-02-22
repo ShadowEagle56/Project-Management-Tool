@@ -127,33 +127,23 @@ function moveToCompleted(index) {
 }
 
 function openTrackTimePopup(index) {
-    let template = ``;
-
-    for (let i = 0; i < appStorage.memberList[appStorage.taskList[index].member].contribution.length; i++) {
-        let member = appStorage.memberList[appStorage.taskList[index].member].contribution[i];
-        let date = member[0].slice(0,10);
-        let hour = parseInt(member[1]);
-        let min = (member[1] - parseInt(member[1])) * 60 > 0 ? parseInt((member[1] - parseInt(member[1])) * 60) : 0;
-        template = `<div class="time-pair">
-                        <div class="input-time-dates">${date} : ${hour} hour(s) ${min} minute(s)</div>
-                        <div i class="fa fa-trash-o" onclick="deleteTimeLog(${i})"></i></div>
-                    </div>`
-        timeContainer.insertAdjacentHTML('beforeend', template);
-    }
     viewTaskPopup.classList.remove("active");
     trackPopup.classList.add("active");
     overlay.classList.add("active");
     if(!document.getElementById(`time-container-${index}`)){
         document.getElementById("time-popup").insertAdjacentHTML('beforeend',
         `<div class="time-container" id="time-container-${index}"></div>`);
-        console.log(appStorage.taskList[index].timeList
-            //document.getElementById(`time-container-${index}`
-            //   ).insertAdjacentHTML(
-            //        'beforeend', `<div class="time-pair">
-            //        <div class="input-time-dates">${t.date} : ${t.days} days ${t.hrs} hours ${t.mins} minutes</div>
-            //            <div i class="fa fa-trash-o" onclick="this.parentNode.remove()"></i></div>
-            //        </div>`
+        for (let i = 0; i < appStorage.taskList[index].timeList.length; i++) {
+            let t = appStorage.taskList[index].timeList[i];
+            console.log(t)
+            document.getElementById(`time-container-${index}`
+                ).insertAdjacentHTML(
+                    'beforeend', `<div class="time-pair">
+                    <div class="input-time-dates">${t._date} : ${t._days} days ${t._hrs} hours ${t._mins} minutes</div>
+                        <div i class="fa fa-trash-o" onclick="this.parentNode.remove()"></i></div>
+                    </div>`
                 );
+        }
     }
 }
 
@@ -164,7 +154,7 @@ function addTime(){
     let date = document.getElementById("time-date").value
     let id = document.querySelector('[id^=time-container]').id
     appStorage.taskList[id.slice(15)].timeList.push(new Time(days, hrs, min, date))
-    console.log(appStorage.taskList[id.slice(15)].timeList)
+    // console.log(appStorage.taskList[id.slice(15)].timeList)
     document.getElementById(id).insertAdjacentHTML(
         'beforeend', `<div class="time-pair">
         <div class="input-time-dates">${date} : ${days} days ${hrs} hours ${min} minutes</div>
@@ -174,31 +164,14 @@ function addTime(){
     updateLocalStorage(APP_DATA_KEY, appStorage);
 }
 
-function deleteTimeLog(index) {
-    // Todo
-}
-
 function closeTrackTimePopup() {
-    timeContainer.innerHTML = "";
+    var liHide = document.querySelectorAll("[id^=time-container]");
+
+    for(var i=0; i<liHide.length; i++){
+        liHide[i].remove();
+    }
     trackPopup.classList.remove("active");
     viewTaskPopup.classList.add("active");
-}
-
-function addTrackedTime(index) {
-    let date = document.getElementById("time-date").value;
-    let hour = document.getElementById("time-hour").value;
-    let min = document.getElementById("time-min").value;
-
-    appStorage.memberList[appStorage.taskList[index].member].addContribution(date, hour, min);
-    console.log(appStorage.memberList[appStorage.taskList[index].member])
-
-    let template = `<div class="time-pair">
-                        <div class="input-time-dates">${date.slice(0,10)} : ${hour} hour(s) ${min} minute(s)</div>
-                        <div i class="fa fa-trash-o"></i></div>
-                    </div>`
-    timeContainer.insertAdjacentHTML('beforeend', template);
-    updateLocalStorage(APP_DATA_KEY, appStorage);
-    // window.location.reload();
 }
 
 // Confirmation to end current sprint
