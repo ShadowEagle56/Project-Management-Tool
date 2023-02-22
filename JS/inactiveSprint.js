@@ -72,7 +72,7 @@ function loadData() {
                     types += `<div class="task-type-display" style="background-color: ${appStorage.typeList[typeIndex].hexVal}"></div>`)
 
             let member = (str) => str.split('').filter(a => a.match(/[A-Z]/)).join('')
-            let name = (task.member) ? task.member._firstName + " " + task.member._lastName : "";
+            let name = (task.member) ? appStorage.memberList[task.member]._firstName + " " + appStorage.memberList[task.member]._lastName : "";
             let shortenMember = (name) ? member(name).slice(0,2) : "N/A"
 
             let card = `<div class="task-card" id="task-${i}" onclick="openViewTaskPopup(${i})">
