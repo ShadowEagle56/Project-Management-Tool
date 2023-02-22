@@ -311,6 +311,26 @@ class Type{
     }
 }
 
+class Time{
+    constructor(days, hrs, mins, date){
+        this._days = days;
+        this._hrs = hrs;
+        this._mins = mins;
+        this._date = date;
+    }
+
+    get days() { return this._days }
+    get hrs() { return this._hrs }
+    get mins() { return this._mins }
+    get date() { return this._date }
+
+    set days(newDays) { this._days = newDays }
+    set hrs(newHrs) { this._hrs = newHrs }
+    set mins(newMins) { this._mins = newMins }
+    set date(newDate) { this._date = newDate }
+
+}
+
 // Constants
 const viewTaskPopup = document.getElementById("view-task-popup");
 const editTaskPopup = document.getElementById("edit-task-popup");

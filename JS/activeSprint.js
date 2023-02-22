@@ -129,6 +129,35 @@ function openTrackTimePopup(index) {
     viewTaskPopup.classList.remove("active");
     trackPopup.classList.add("active");
     overlay.classList.add("active");
+    if(!document.getElementById(`time-container-${index}`)){
+        document.getElementById("time-popup").insertAdjacentHTML('beforeend',
+        `<div class="time-container" id="time-container-${index}"></div>`);
+        console.log(appStorage.taskList[index].timeList
+            //document.getElementById(`time-container-${index}`
+            //   ).insertAdjacentHTML(
+            //        'beforeend', `<div class="time-pair">
+            //        <div class="input-time-dates">${t.date} : ${t.days} days ${t.hrs} hours ${t.mins} minutes</div>
+            //            <div i class="fa fa-trash-o" onclick="this.parentNode.remove()"></i></div>
+            //        </div>`
+                );
+    }
+}
+
+function addTime(){
+    let days = document.getElementById("time-day").value
+    let hrs = document.getElementById("time-hour").value
+    let min = document.getElementById("time-min").value
+    let date = document.getElementById("time-date").value
+    let id = document.querySelector('[id^=time-container]').id
+    appStorage.taskList[id.slice(15)].timeList.push(new Time(days, hrs, min, date))
+    console.log(appStorage.taskList[id.slice(15)].timeList)
+    document.getElementById(id).insertAdjacentHTML(
+        'beforeend', `<div class="time-pair">
+        <div class="input-time-dates">${date} : ${days} days ${hrs} hours ${min} minutes</div>
+            <div i class="fa fa-trash-o" onclick="this.parentNode.remove()"></i></div>
+        </div>`
+    )
+    updateLocalStorage(APP_DATA_KEY, appStorage);
 }
 
 function closeTrackTimePopup() {

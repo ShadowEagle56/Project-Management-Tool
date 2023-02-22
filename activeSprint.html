@@ -97,12 +97,12 @@
 
             <div class="time-title">Hours</div>
             <div>
-                <input type="number" id="time-hour" value="0" class="time-input" min="0">
+                <input type="number" id="time-hour" value="0" class="time-input" min="0" max="24">
             </div>
 
             <div class="time-title">Minutes</div>
             <div>
-                <input type="number" id="time-min" value="0" class="time-input" min="0">
+                <input type="number" id="time-min" value="0" class="time-input" min="0" max="60">
             </div>
 
             <div class="time-title">Date</div>
@@ -112,15 +112,7 @@
         </div>
         
         <div class="time-submit">
-            <button>Add</button>
-        </div>
-
-        <div class="time-container" id="time-container">
-            <!-- Placeholder for testing -->
-            <div class="time-pair">
-                <div class="input-time-dates">2022-02-01 : 1 day 1 hour 30 minutes</div>
-                <div i class="fa fa-trash-o"></i></div>
-            </div>
+            <button onclick="addTime()">Add</button>
         </div>
     </div>
 
